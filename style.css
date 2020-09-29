@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Baloo Tammudu 2', cursive;
+}
+
+header {
+  background-color: #4a752c;
+  box-shadow: 2px 2px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  display: flex;
+  text-align: center;
+  height: 100%;
+  padding: 1rem;
+  font-size: 1.25rem;
+  /* box-shadow: 2px 2px 5px;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3); */
+}
