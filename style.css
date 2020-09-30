@@ -9,17 +9,52 @@ body {
 }
 
 header {
-  background-color: #4a752c;
+  /* background-color: #4a752c; */
+  background-color: #303030;
+  color: whitesmoke;
   box-shadow: 2px 2px 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  /* position: relative; */
   display: flex;
-  text-align: center;
-  height: 100%;
+  /* text-align: center; */
+  /* height: 50%; */
   padding: 1rem;
   font-size: 1.25rem;
-  /* box-shadow: 2px 2px 5px;
-  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3); */
+  /* text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3); */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.score-box {
+  text-align: center;
+  border: 3px solid blue;
+  height: 90%;
+  margin: 1rem;
+  padding: 10px;
+  width: 50%;
+}
+
+.canvas-container {
+  border: 3px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameCanvas {
+  /* display: flex;
+  justify-content: center; */
+}
+
+.apple-icon {
+  color: #b11b1b;
+}
+
+.instructions {
+  text-align: center;
 }
