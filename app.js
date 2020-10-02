@@ -13,19 +13,11 @@ window.onload = function () {
     moveSnake()
     drawApple()
   }, 50)
-  // works:
-  // window.addEventListener('keydown', e => {
-  //   if (e.key === 'ArrowUp') {
-  //     console.log('Up arrow press!')
-  //   }
 }
 
 window.addEventListener('keydown', gameControls)
 
 function gameControls (e) {
-  // if (e.key === 'ArrowUp') {
-  //   console.log('Up arrow press!')
-  // }
   switch (e.key) {
     case 'ArrowUp':
       console.log('Up arrow press!')
