@@ -1,18 +1,28 @@
 let canvas
 let canvasContext
-const snakeX = 50
-const snakeY = 50
+let snakeX = 50
+const snakeSpeedX = 50
+let snakeY = 50
+const snakeSpeedY = 50
 const appleX = 50
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
 
+  const framesPerSecond = 30 // temp local variable
+
   setInterval(() => {
     drawCanvas()
     moveSnake()
     drawApple()
-  }, 50)
+  }, 1000 / framesPerSecond)
+
+  // setInterval(() => {
+  //   drawCanvas()
+  //   moveSnake()
+  //   drawApple()
+  // }, 50)
 }
 
 window.addEventListener('keydown', gameControls)
@@ -20,16 +30,20 @@ window.addEventListener('keydown', gameControls)
 function gameControls (e) {
   switch (e.key) {
     case 'ArrowUp':
-      console.log('Up arrow press!')
+      // console.log('Up arrow press!')
+      snakeY >= canvas.height ? alert('Game Over!') : snakeY += snakeSpeedY
       break
     case 'ArrowRight':
-      console.log('Right arrow press!')
+      // console.log('Right arrow press!')
+      snakeX >= canvas.width ? alert('game over') : snakeX += snakeSpeedX
+      // snakeX += snakeSpeedX
       break
     case 'ArrowDown':
       console.log('Down arrow press!')
       break
     case 'ArrowLeft':
-      console.log('Left arrow press!')
+      // console.log('Left arrow press!')
+      snakeX < 0 ? alert('Game Over!') : snakeX -= snakeSpeedX
       break
   }
 }
