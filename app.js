@@ -2,49 +2,43 @@ let canvas
 let canvasContext
 let snakeX = 50
 const snakeSpeedX = 50
-let snakeY = 50
+let snakeY = 200
 const snakeSpeedY = 50
 const appleX = 50
+
+const snakeBody = {
+  x: 40,
+  y: 20
+}
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
 
-  const framesPerSecond = 30 // temp local variable
+  const framesPerSecond = 30
 
   setInterval(() => {
     drawCanvas()
-    moveSnake()
+    drawSnake()
     drawApple()
   }, 1000 / framesPerSecond)
-
-  // setInterval(() => {
-  //   drawCanvas()
-  //   moveSnake()
-  //   drawApple()
-  // }, 50)
 }
 
 window.addEventListener('keydown', gameControls)
 
 function gameControls (e) {
-  e.preventDefault()
   switch (e.key) {
     case 'ArrowUp':
-      // console.log('Up arrow press!')
-      snakeY >= canvas.height ? alert('Game Over!') : snakeY += snakeSpeedY
+      snakeY < 0 ? alert('Snake hit top wall. Game over!') : snakeY -= snakeSpeedY
       break
     case 'ArrowRight':
-      // console.log('Right arrow press!')
-      snakeX >= canvas.width ? alert('game over') : snakeX += snakeSpeedX
-      // snakeX += snakeSpeedX
+      snakeX >= canvas.width ? alert('Snake hit right wall. Game over!') : snakeX += snakeSpeedX
       break
     case 'ArrowDown':
-      console.log('Down arrow press!')
+      snakeY >= canvas.height ? alert('Snake hit bottom wall. Game over!') : snakeY += snakeSpeedY
       break
     case 'ArrowLeft':
-      // console.log('Left arrow press!')
-      snakeX < 0 ? alert('Game Over!') : snakeX -= snakeSpeedX
+      snakeX < 0 ? alert('Snake hit left wall. Game Over!') : snakeX -= snakeSpeedX
       break
   }
 }
@@ -54,16 +48,16 @@ function drawCanvas () {
   canvasContext.fillRect(0, 0, canvas.width, canvas.height)
 }
 
-function moveSnake () {
-  // snakeX += 10
-  // snakeY += 10
+function drawSnake () {
+  canvasContext.fillStyle = 'black'
+  canvasContext.fillRect(snakeX + 20, snakeY, snakeBody.x, snakeBody.y)
   canvasContext.fillStyle = 'blue'
-  // below 100px from left, 200px from top, 50px wide, 25px tall:
-  canvasContext.fillRect(snakeX, 200, 50, 20)
+  // canvasContext.fillRect(snakeX, snakeY, 50, 20)
+  // canvasContext.clearRect(snakeX, snakeY, snakeBody.x, snakeBody.y)
+  canvasContext.fillRect(snakeX, snakeY, snakeBody.x, snakeBody.y)
 }
 
 function drawApple () {
-  // appleX
-  canvasContext.fillStyle = 'red'
+  canvasContext.fillStyle = ' #b11b1b'
   canvasContext.fillRect(appleX, 100, 20, 20)
 }
