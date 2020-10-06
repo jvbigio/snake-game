@@ -28,6 +28,7 @@ window.onload = function () {
 window.addEventListener('keydown', gameControls)
 
 function gameControls (e) {
+  e.preventDefault()
   switch (e.key) {
     case 'ArrowUp':
       // console.log('Up arrow press!')
