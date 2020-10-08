@@ -1,10 +1,11 @@
 let canvas
 let canvasContext
-let snakeX = 50
+let snakeX = 150
 const snakeSpeedX = 50
 let snakeY = 200
 const snakeSpeedY = 50
 const appleX = 50
+const appleY = 100
 
 const snakeBody = {
   x: 40,
@@ -49,15 +50,17 @@ function drawCanvas () {
 }
 
 function drawSnake () {
-  canvasContext.fillStyle = 'black'
-  canvasContext.fillRect(snakeX + 20, snakeY, snakeBody.x, snakeBody.y)
+  canvasContext.fillStyle = '#303030'
+  canvasContext.fillRect(snakeX, snakeY, snakeBody.x + 20, snakeBody.y)
   canvasContext.fillStyle = 'blue'
-  // canvasContext.fillRect(snakeX, snakeY, 50, 20)
-  // canvasContext.clearRect(snakeX, snakeY, snakeBody.x, snakeBody.y)
   canvasContext.fillRect(snakeX, snakeY, snakeBody.x, snakeBody.y)
 }
 
 function drawApple () {
   canvasContext.fillStyle = ' #b11b1b'
-  canvasContext.fillRect(appleX, 100, 20, 20)
+  canvasContext.fillRect(appleX, appleY, 20, 20)
+}
+
+if (snakeBody.x >= appleX || snakeBody.y === appleY) {
+  alert('collision with apple!')
 }
