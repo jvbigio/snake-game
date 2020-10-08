@@ -1,3 +1,7 @@
+:root {
+  --main-bg-color: #f2f3f4;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,23 +10,19 @@
 
 body {
   font-family: 'Baloo Tammudu 2', cursive;
+  background: var(--main-bg-color);
 }
 
 header {
-  /* background-color: #4a752c; */
   background-color: #303030;
-  color: whitesmoke;
+  color: var(--main-bg-color);
   box-shadow: 2px 2px 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* position: relative; */
   display: flex;
-  /* text-align: center; */
-  /* height: 50%; */
   padding: 1rem;
   font-size: 1.25rem;
-  /* text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3); */
 }
 
 .container {
@@ -30,9 +30,9 @@ header {
   flex-direction: column;
   align-items: center;
 }
+
 .score-box {
   text-align: center;
-  /* border: 3px solid blue; */
   height: 90%;
   margin: 1rem;
   padding: 10px;
@@ -54,6 +54,10 @@ header {
 
 .apple-icon {
   color: #b11b1b;
+}
+
+.trophy {
+  color: gold;
 }
 
 .instructions {
