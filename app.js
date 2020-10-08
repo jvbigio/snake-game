@@ -15,7 +15,7 @@ const snakeBody = {
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
-
+  eatApple()
   const framesPerSecond = 30
 
   setInterval(() => {
@@ -37,6 +37,26 @@ function gameControls (e) {
       break
     case 'ArrowDown':
       snakeY >= canvas.height ? alert('Snake hit bottom wall. Game over!') : snakeY += snakeSpeedY
+      // canvasContext.fillRect(50, 20, 100, 50)
+      // canvasContext.translate(60, 210)
+      // canvasContext.rotate(Math.PI / 2)
+      // canvasContext.translate(-60, -210)
+      // canvasContext.beginPath()
+      // canvasContext.moveTo(snakeX + 20, snakeY + 20)
+      // canvasContext.rotate(snakeX, 20)
+      // canvasContext.stroke()
+      // canvasContext.save()
+      // canvasContext.translate(snakeX, snakeY + 20)
+      // canvasContext.rotate(90)
+      // canvasContext.translate(-snakeX, -snakeY + 20)
+      // canvasContext.drawImage(snakeBody, 0, 0)
+      // canvasContext.restore()
+      // canvasContext.translate(snakeBody.x / 2, snakeSpeedY.y / 2)
+      // canvasContext.rotate(Math.PI / 2)
+      // canvasContext.fillRect(snakeBody.x / -2, snakeBody.y / -2, snakeBody.x, snakeBody.y)
+      // canvasContext.fillRect(snakeX, snakeY, snakeBody.x - 20, snakeBody.y - 20)
+      // canvasContext.fillStyle = '#303030'
+      // canvasContext.clearRect(snakeX - 20, snakeY - 20, snakeBody.x - 20, snakeBody.y - 20)
       break
     case 'ArrowLeft':
       snakeX < 0 ? alert('Snake hit left wall. Game Over!') : snakeX -= snakeSpeedX
@@ -61,6 +81,8 @@ function drawApple () {
   canvasContext.fillRect(appleX, appleY, 20, 20)
 }
 
-if (snakeBody.x >= appleX || snakeBody.y === appleY) {
-  alert('collision with apple!')
+function eatApple () {
+  if (snakeBody.x === appleX || snakeBody.y === appleY) {
+    console.log('collision with apple!')
+  }
 }
