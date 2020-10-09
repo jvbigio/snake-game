@@ -7,10 +7,7 @@ const snakeSpeedY = 50
 const appleX = 50
 const appleY = 100
 
-const snakeBody = {
-  x: 40,
-  y: 20
-}
+const snakeBody = [{ x: 20, y: 80 }, { x: 40, y: 80 }, { x: 60, y: 80 }]
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
@@ -36,30 +33,7 @@ function gameControls (e) {
       snakeX >= canvas.width ? alert('Snake hit right wall. Game over!') : snakeX += snakeSpeedX
       break
     case 'ArrowDown':
-      snakeY >= canvas.height ? alert('Snake hit bottom wall. Game over!') : snakeY += snakeSpeedY
-      // canvasContext.fillRect(50, 20, 100, 50)
-      // canvasContext.translate(60, 210)
-      // canvasContext.rotate(Math.PI / 2)
-      // canvasContext.translate(-60, -210)
-      // canvasContext.beginPath()
-      // canvasContext.moveTo(snakeX + 20, snakeY + 20)
-      // canvasContext.rotate(snakeX, 20)
-      // canvasContext.stroke()
-      // canvasContext.save()
-      // canvasContext.translate(snakeX, snakeY + 20)
-      // canvasContext.rotate(90)
-      // canvasContext.translate(-snakeX, -snakeY + 20)
-      // canvasContext.translate(snakeBody.x, snakeBody.y + 20)
-      // canvasContext.rotate(90)
-      // canvasContext.translate(-snakeBody.x, -snakeBody.y + 20)
-      // canvasContext.drawImage(snakeBody, 0, 0)
-      // canvasContext.restore()
-      // canvasContext.translate(snakeBody.x / 2, snakeSpeedY.y / 2)
-      // canvasContext.rotate(Math.PI / 2)
-      // canvasContext.fillRect(snakeBody.x / -2, snakeBody.y / -2, snakeBody.x, snakeBody.y)
-      // canvasContext.fillRect(snakeX, snakeY, snakeBody.x - 20, snakeBody.y - 20)
-      // canvasContext.fillStyle = '#303030'
-      // canvasContext.clearRect(snakeX - 20, snakeY - 20, snakeBody.x - 20, snakeBody.y - 20)
+      // snakeY >= canvas.height ? alert('Snake hit bottom wall. Game over!') : snakeY += snakeSpeedY // whole body moves down
       break
     case 'ArrowLeft':
       snakeX < 0 ? alert('Snake hit left wall. Game Over!') : snakeX -= snakeSpeedX
@@ -73,10 +47,13 @@ function drawCanvas () {
 }
 
 function drawSnake () {
-  canvasContext.fillStyle = '#303030'
-  canvasContext.fillRect(snakeX, snakeY, snakeBody.x + 20, snakeBody.y)
-  canvasContext.fillStyle = 'blue'
-  canvasContext.fillRect(snakeX, snakeY, snakeBody.x, snakeBody.y)
+  snakeBody.forEach(snake => {
+    canvasContext.fillStyle = '#303030'
+    // from left, from top, width, height:
+    canvasContext.fillRect(snakeX, snakeY, snake.x + 20, 20)
+    canvasContext.fillStyle = 'blue'
+    canvasContext.fillRect(snakeX, snakeY, snake.x, 20)
+  })
 }
 
 function drawApple () {
