@@ -2,7 +2,6 @@ let canvas
 let canvasContext
 const snakeHeight = 20
 const snakeSpeedX = 20
-// let snakeY = 200
 const snakeSpeedY = 20
 const appleX = 200
 const appleY = 400
