@@ -60,7 +60,7 @@ function drawApple () {
 }
 
 function eatApple () {
-  if (snakeBody.x === appleX || snakeBody.y === appleY) {
+  if (snakeBody[0] === appleX || snakeBody[0] === appleY) {
     console.log('collision with apple!')
   }
 }
