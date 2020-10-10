@@ -66,5 +66,5 @@ function eatApple () {
 }
 
 function moveDown () {
-  snakeBody[0].x = snakeBody[0].y + snakeSpeedY
+  snakeBody[0].y += snakeSpeedY
 }
