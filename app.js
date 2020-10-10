@@ -30,7 +30,8 @@ function gameControls (e) {
       snakeBody[0].y < 0 ? alert('Snake hit top wall. Game over!') : snakeBody[0].y -= snakeSpeedY
       break
     case 'ArrowRight':
-      snakeBody[0].x >= canvas.width ? alert('Snake hit right wall. Game over!') : snakeBody[0].x += snakeSpeedX
+      // Why snakeBody[0].x (head) doesn't work? for right wall collision
+      snakeBody[2].x >= canvas.width ? alert('Snake hit right wall. Game over!') : snakeBody[2].x += snakeSpeedX // why snakeBody[0].x (head) doesn't work??
       break
     case 'ArrowDown':
       snakeBody[0].y >= canvas.height ? alert('Snake hit bottom wall. Game over!') : moveDown()
