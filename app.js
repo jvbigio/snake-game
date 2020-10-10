@@ -6,7 +6,13 @@ const snakeSpeedY = 20
 const appleX = 200
 const appleY = 400
 const deltaY = 20
-const snakeBody = [{ x: 60, y: 80 }, { x: 40, y: 80 }, { x: 20, y: 80 }]
+
+const snakeBody = [
+  { x: 60, y: 80 }, // head
+  { x: 40, y: 80 },
+  { x: 20, y: 80 },
+  { x: 0, y: 80 } // tail
+]
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
@@ -26,20 +32,23 @@ window.addEventListener('keydown', gameControls)
 function gameControls (e) {
   switch (e.key) {
     case 'ArrowUp':
-      snakeBody[0].y < 0 ? alert('Snake hit top wall. Game over!') : snakeBody[0].y -= snakeSpeedY
+      snakeBody[0].y <= 0 ? alert('Snake hit top wall. Game over!') : snakeBody[0].y -= snakeSpeedY
       break
     case 'ArrowRight':
-      // Why snakeBody[0].x (head) doesn't work? for right wall collision
-      // snakeBody[2].x >= canvas.width ? alert('Snake hit right wall. Game over!') : snakeBody[2].x += snakeSpeedX // why snakeBody[0].x (head) doesn't work??
-      snakeBody[0] >= canvas.width ? alert('Snake hit right wall. Game over!') : snakeBody[2].x += snakeSpeedX // why snakeBody[0].x (head) doesn't work??
+      snakeBody[0].x === canvas.width - 20 ? alert('Snake hit right wall. Game over!') : snakeBody[0].x += snakeSpeedX
+      for (let i = 1; i < snakeBody.length; i++) {
+        const snakePart = snakeBody[i]
+        snakePart.x += snakeSpeedX
+      }
       break
     case 'ArrowDown':
-      snakeBody[0].y >= canvas.height ? alert('Snake hit bottom wall. Game over!') : moveDown()
+      snakeBody[0].y >= canvas.height - snakeHeight ? alert('Snake hit bottom wall. Game over!') : moveDown()
       break
     case 'ArrowLeft':
-      snakeBody[0].x < 0 ? alert('Snake hit left wall. Game Over!') : snakeBody[0].x -= snakeSpeedX
+      snakeBody[0].x <= 0 ? alert('Snake hit left wall. Game Over!') : snakeBody[0].x -= snakeSpeedX
       break
   }
+  debugger
 }
 
 function drawCanvas () {
@@ -49,10 +58,12 @@ function drawCanvas () {
 
 function drawSnake () {
   canvasContext.fillStyle = '#303030'
-  // // from left, from top, width, height:
-  canvasContext.fillRect(snakeBody[2].x, snakeBody[0].y, snakeBody[0].x + 20, snakeHeight)
+  canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight) // head
   canvasContext.fillStyle = 'blue'
-  canvasContext.fillRect(snakeBody[2].x, snakeBody[0].y, snakeBody[0].x, snakeHeight)
+  for (let i = 1; i < snakeBody.length; i++) {
+    const element = snakeBody[i]
+    canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
+  }
 }
 
 function drawApple () {
@@ -61,20 +72,11 @@ function drawApple () {
 }
 
 function eatApple () {
-  if (snakeBody[0] === appleX || snakeBody[0] === appleY) {
+  if (snakeBody[0].x === appleX || snakeBody[0].y === appleY) {
     console.log('collision with apple!')
   }
 }
 
 function moveDown () {
-  /*
-  pseudo code
-  snakeBody[0].y + 20 (down y-axis)
-  snakeBody[1].x = snakeBody[0].x previous location
-  snakeBody[2].x = snakeBody[1].x previous location
-
-  snakeBody[1].y + 20
-  snakeBody[2].y + 20
-  */
-  snakeBody[0].y += snakeSpeedY
+  snakeBody[0].y += deltaY
 }
