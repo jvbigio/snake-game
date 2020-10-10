@@ -66,5 +66,14 @@ function eatApple () {
 }
 
 function moveDown () {
+  /*
+  pseudo code
+  snakeBody[0].y + 20 (down y-axis)
+  snakeBody[1].x = snakeBody[0].x previous location
+  snakeBody[2].x = snakeBody[1].x previous location
+
+  snakeBody[1].y + 20
+  snakeBody[2].y + 20
+  */
   snakeBody[0].y += snakeSpeedY
 }
