@@ -8,10 +8,10 @@ const appleY = 400
 const deltaY = 20
 
 const snakeBody = [
-  { x: 60, y: 80 }, // head
+  { x: 60, y: 80 },
   { x: 40, y: 80 },
   { x: 20, y: 80 },
-  { x: 0, y: 80 } // tail
+  { x: 0, y: 80 }
 ]
 
 window.onload = function () {
@@ -42,13 +42,18 @@ function gameControls (e) {
       }
       break
     case 'ArrowDown':
-      snakeBody[0].y >= canvas.height - snakeHeight ? alert('Snake hit bottom wall. Game over!') : moveDown()
+      snakeBody[0].y >= canvas.height - snakeHeight ? alert('Snake hit bottom wall. Game over!') : snakeBody[0].y += deltaY
+
+      for (let i = 1; i < snakeBody.length; i++) {
+        const snakePart = snakeBody[i]
+
+        snakePart.x < snakeBody[0].x ? snakePart.x += snakeSpeedX : snakePart.y += deltaY
+      }
       break
     case 'ArrowLeft':
       snakeBody[0].x <= 0 ? alert('Snake hit left wall. Game Over!') : snakeBody[0].x -= snakeSpeedX
       break
   }
-  debugger
 }
 
 function drawCanvas () {
@@ -75,8 +80,4 @@ function eatApple () {
   if (snakeBody[0].x === appleX || snakeBody[0].y === appleY) {
     console.log('collision with apple!')
   }
-}
-
-function moveDown () {
-  snakeBody[0].y += deltaY
 }
