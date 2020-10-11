@@ -1,6 +1,6 @@
 # Snake Game
 
-A simple yet fun take on the classic snake game written in vanilla JavaScript, HTML, and CSS.
+A simple yet fun take on the classic snake game, written in vanilla JavaScript, HTML, and CSS.
 
 Play [here](https://jvbigio.github.io/expense-tracker/)
 
