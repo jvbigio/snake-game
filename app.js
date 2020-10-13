@@ -31,63 +31,16 @@ window.addEventListener('keydown', gameControls)
 function gameControls (e) {
   switch (e.key) {
     case 'ArrowUp':
-      snakeBody[0].y <= 0 ? alert('Snake hit top wall. Game over!') : snakeBody[0].y -= moveY
-      for (let i = 1; i < snakeBody.length; i++) {
-        const snakePart = snakeBody[i]
-
-        snakePart.x < snakeBody[0].x ? snakePart.x += moveX : snakePart.y -= moveY
-      }
+      snakeBody[0].y <= 0 ? alert('Snake hit top wall. Game over!') : moveUp()
       break
     case 'ArrowRight':
-      snakeBody[0].x === canvas.width - 20 ? alert('Snake hit right wall. Game over!') : snakeBody[0].x += moveX
-      for (let i = 1; i < snakeBody.length; i++) {
-        const snakePart = snakeBody[i]
-
-        // starting position
-        if (snakePart.y === snakeBody[0].y) {
-          snakePart.x += moveX
-        } else if (snakePart.y < snakeBody[0].y) { // head vertical down
-          snakePart.y += moveY
-        } else if (snakePart.y > snakeBody[0].y) { // head vertical up
-          snakePart.y -= moveY
-        }
-      }
+      snakeBody[0].x === canvas.width - 20 ? alert('Snake hit right wall. Game over!') : moveRight()
       break
     case 'ArrowDown':
-      snakeBody[0].y >= canvas.height - snakeHeight ? alert('Snake hit bottom wall. Game over!') : snakeBody[0].y += moveY
-
-      for (let i = 1; i < snakeBody.length; i++) {
-        const snakePart = snakeBody[i]
-
-        // starting position
-        if (snakePart.x < snakeBody[0].x) {
-          snakePart.x += moveX
-        } else if (snakePart.y < snakeBody[0].y) { // head vertical down
-          snakePart.y += moveY
-        } else if (snakePart.y > snakeBody[0].y) { // head vertical up
-          snakePart.y -= moveY
-        // head facing left
-        } else if (snakePart.x > snakeBody[0].x) {
-          snakePart.x -= moveX
-        }
-      }
+      snakeBody[0].y >= canvas.height - snakeHeight ? alert('Snake hit bottom wall. Game over!') : moveDown()
       break
     case 'ArrowLeft':
-      snakeBody[0].x <= 0 ? alert('Snake hit left wall. Game Over!') : snakeBody[0].x -= moveX
-
-      for (let i = 1; i < snakeBody.length; i++) {
-        const snakePart = snakeBody[i]
-
-        // head facing left
-        if (snakePart.y === snakeBody[0].y && snakePart.x > snakeBody[0].x) {
-          snakePart.x -= moveX
-        } else if (snakePart.y < snakeBody[0].y) { // head vertical down
-          snakePart.y += moveY
-        } else if (snakePart.y > snakeBody[0].y) { // head vertical up
-          snakePart.y -= moveY
-        }
-      }
-
+      snakeBody[0].x <= 0 ? alert('Snake hit left wall. Game Over!') : moveLeft()
       break
   }
 }
@@ -99,7 +52,7 @@ function drawCanvas () {
 
 function drawSnake () {
   canvasContext.fillStyle = '#303030'
-  canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight) // head
+  canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
   canvasContext.fillStyle = 'blue'
   for (let i = 1; i < snakeBody.length; i++) {
     const element = snakeBody[i]
@@ -115,5 +68,69 @@ function drawApple () {
 function eatApple () {
   if (snakeBody[0].x === appleX || snakeBody[0].y === appleY) {
     console.log('collision with apple!')
+  }
+}
+
+function moveUp () {
+  snakeBody[0].y -= moveY
+
+  for (let i = 1; i < snakeBody.length; i++) {
+    const snakePart = snakeBody[i]
+
+    if (snakePart.x < snakeBody[0].x) {
+      snakePart.x += moveX
+    } else if (snakePart.x > snakeBody[0].x) {
+      snakePart.x -= moveX
+    } else {
+      snakePart.y -= moveY
+    }
+  }
+}
+
+function moveRight () {
+  snakeBody[0].x += moveX
+
+  for (let i = 1; i < snakeBody.length; i++) {
+    const snakePart = snakeBody[i]
+
+    if (snakePart.y === snakeBody[0].y) {
+      snakePart.x += moveX
+    } else if (snakePart.y < snakeBody[0].y) {
+      snakePart.y += moveY
+    } else if (snakePart.y > snakeBody[0].y) {
+      snakePart.y -= moveY
+    }
+  }
+}
+
+function moveDown () {
+  snakeBody[0].y += moveY
+
+  for (let i = 1; i < snakeBody.length; i++) {
+    const snakePart = snakeBody[i]
+
+    if (snakePart.x < snakeBody[0].x) {
+      snakePart.x += moveX
+    } else if (snakePart.x > snakeBody[0].x) {
+      snakePart.x -= moveX
+    } else {
+      snakePart.y += moveY
+    }
+  }
+}
+
+function moveLeft () {
+  snakeBody[0].x -= moveX
+
+  for (let i = 1; i < snakeBody.length; i++) {
+    const snakePart = snakeBody[i]
+
+    if (snakePart.y === snakeBody[0].y && snakePart.x > snakeBody[0].x) {
+      snakePart.x -= moveX
+    } else if (snakePart.y < snakeBody[0].y) {
+      snakePart.y += moveY
+    } else if (snakePart.y > snakeBody[0].y) {
+      snakePart.y -= moveY
+    }
   }
 }
