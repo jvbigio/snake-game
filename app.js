@@ -3,6 +3,7 @@ let canvasContext
 const snakeHeight = 20
 const moveX = 20
 const moveY = 20
+let ateApple = false
 
 const snakeBody = [
   { x: 60, y: 80 },
@@ -21,7 +22,7 @@ window.onload = function () {
   setInterval(() => {
     drawCanvas()
     drawSnake()
-    // drawApple()
+    drawApple()
   }, 1000 / framesPerSecond)
 }
 window.addEventListener('keydown', gameControls)
