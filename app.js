@@ -2,8 +2,6 @@ let canvas
 let canvasContext
 const snakeHeight = 20
 const moveX = 20
-const appleX = 200
-const appleY = 400
 const moveY = 20
 
 const snakeBody = [
@@ -16,8 +14,8 @@ const snakeBody = [
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
-  // drawApple()
-  eatApple()
+  drawApple()
+  // eatApple()
   const framesPerSecond = 30
 
   setInterval(() => {
@@ -26,7 +24,6 @@ window.onload = function () {
     // drawApple()
   }, 1000 / framesPerSecond)
 }
-
 window.addEventListener('keydown', gameControls)
 
 function gameControls (e) {
@@ -62,23 +59,24 @@ function drawSnake () {
 }
 
 function drawApple () {
-  canvasContext.fillStyle = ' #b11b1b'
-  canvasContext.fillRect(appleX, appleY, 20, 20) // keep
-  canvasContext.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 20, 20)
+  canvasContext.fillStyle = '#b11b1b'
+  const appleX = Math.floor(Math.random() * (canvas.width - 20))
+  const appleY = Math.floor(Math.random() * (canvas.height - 20))
+  canvasContext.fillRect(appleX, appleY, 20, 20)
 }
 
-function randomizeApple () {
+// function randomizeApple () {
+//   // canvasContext.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 20, 20)
+// }
 
-}
-
-function eatApple () {
-  // if ((snakeBody[0].x + 20 === appleX) || (snakeBody[0].y + 20 === appleY)) {
-  //   alert('collision with apple!')
-  // }
-  // if (appleY > snakeBody[0].y && appleY < snakeBody[0].y + snakeHeight) {
-  //   alert('Collision with apple!')
-  // }
-}
+// function eatApple () {
+//   // if ((snakeBody[0].x + 20 === appleX) || (snakeBody[0].y + 20 === appleY)) {
+//   //   alert('collision with apple!')
+//   // }
+//   // if (appleY > snakeBody[0].y && appleY < snakeBody[0].y + snakeHeight) {
+//   //   alert('Collision with apple!')
+//   // }
+// }
 
 function moveUp () {
   snakeBody[0].y -= moveY
