@@ -7,9 +7,7 @@ const randomX = Math.random() * (780 + 20)
 const appleX = randomX - (randomX % 20)
 const randomY = Math.random() * (580 + 20)
 const appleY = randomY - (randomY % 20)
-console.log(appleX)
-console.log(appleY)
-// const ateApple = false
+let direction
 
 const snakeBody = [
   { x: 60, y: 80 },
@@ -33,18 +31,24 @@ window.onload = function () {
 window.addEventListener('keydown', gameControls)
 
 function gameControls (e) {
-  switch (e.key) {
+  const keyPress = e.key
+  switch (keyPress) {
     case 'ArrowUp':
       snakeBody[0].y <= 0 ? alert('Snake hit top wall. Game over!') : moveUp()
+      direction = keyPress
+
       break
     case 'ArrowRight':
       snakeBody[0].x === canvas.width - 20 ? alert('Snake hit right wall. Game over!') : moveRight()
+      direction = keyPress
       break
     case 'ArrowDown':
       snakeBody[0].y >= canvas.height - snakeHeight ? alert('Snake hit bottom wall. Game over!') : moveDown()
+      direction = keyPress
       break
     case 'ArrowLeft':
       snakeBody[0].x <= 0 ? alert('Snake hit left wall. Game Over!') : moveLeft()
+      direction = keyPress
       break
   }
   e.preventDefault()
@@ -88,7 +92,6 @@ function moveUp () {
 
 function moveRight () {
   snakeBody[0].x += moveX
-
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
 
@@ -100,9 +103,14 @@ function moveRight () {
       snakePart.y -= moveY
     }
   }
+  // move continuously to right
+  snakeBody.forEach(snake => {
+    snake += moveX
+  })
 }
 
 function moveDown () {
+  direction = 'down'
   snakeBody[0].y += moveY
 
   for (let i = 1; i < snakeBody.length; i++) {
@@ -119,6 +127,7 @@ function moveDown () {
 }
 
 function moveLeft () {
+  direction = 'left'
   snakeBody[0].x -= moveX
 
   for (let i = 1; i < snakeBody.length; i++) {
