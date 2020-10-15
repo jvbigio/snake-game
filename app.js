@@ -3,7 +3,13 @@ let canvasContext
 const snakeHeight = 20
 const moveX = 20
 const moveY = 20
-let ateApple = false
+const randomX = Math.random() * (780 + 20)
+const appleX = randomX - (randomX % 20)
+const randomY = Math.random() * (580 + 20)
+const appleY = randomY - (randomY % 20)
+console.log(appleX)
+console.log(appleY)
+// const ateApple = false
 
 const snakeBody = [
   { x: 60, y: 80 },
@@ -16,7 +22,6 @@ window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   drawApple()
-  // eatApple()
   const framesPerSecond = 30
 
   setInterval(() => {
@@ -42,6 +47,7 @@ function gameControls (e) {
       snakeBody[0].x <= 0 ? alert('Snake hit left wall. Game Over!') : moveLeft()
       break
   }
+  e.preventDefault()
 }
 
 function drawCanvas () {
@@ -61,23 +67,8 @@ function drawSnake () {
 
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
-  const appleX = Math.floor(Math.random() * (canvas.width - 20))
-  const appleY = Math.floor(Math.random() * (canvas.height - 20))
   canvasContext.fillRect(appleX, appleY, 20, 20)
 }
-
-// function randomizeApple () {
-//   // canvasContext.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 20, 20)
-// }
-
-// function eatApple () {
-//   // if ((snakeBody[0].x + 20 === appleX) || (snakeBody[0].y + 20 === appleY)) {
-//   //   alert('collision with apple!')
-//   // }
-//   // if (appleY > snakeBody[0].y && appleY < snakeBody[0].y + snakeHeight) {
-//   //   alert('Collision with apple!')
-//   // }
-// }
 
 function moveUp () {
   snakeBody[0].y -= moveY
