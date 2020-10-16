@@ -30,39 +30,13 @@ window.onload = function () {
     drawCanvas()
     drawSnake()
     drawApple()
-    // eatApple()
+    eatApple()
   }, 1000 / framesPerSecond)
 }
-window.addEventListener('keydown', gameControls)
-
-function gameControls (e) {
-  // debugger
+window.addEventListener('keydown', e => {
   const keyPress = e.key
-  switch (keyPress) {
-    case 'ArrowUp':
-      // snakeBody[0].y <= 0 ? alert('Snake hit top wall. Game over!') : moveUp()
-      moveUp()
-      direction = keyPress
-      break
-    case 'ArrowRight':
-      // why does this no longer work after adding lines 71 - 79 conditionals?
-      // snakeBody[0].x === canvas.width - 20 ? alert('Snake hit right wall. Game over!') : moveRight()
-      moveRight()
-      direction = keyPress
-      break
-    case 'ArrowDown':
-      // snakeBody[0].y >= canvas.height - snakeHeight ? alert('Snake hit bottom wall. Game over!') : moveDown()
-      moveDown()
-      direction = keyPress
-      break
-    case 'ArrowLeft':
-      // snakeBody[0].x <= 0 ? alert('Snake hit left wall. Game Over!') : moveLeft()
-      moveLeft()
-      direction = keyPress
-      break
-  }
-  // e.preventDefault()
-}
+  direction = keyPress
+})
 
 function drawCanvas () {
   canvasContext.fillStyle = 'green'
@@ -80,7 +54,7 @@ function drawSnake () {
   if (direction === 'ArrowUp') {
     moveUp()
   } else if (direction === 'ArrowRight') {
-    // moveRight()
+    moveRight()
   } else if (direction === 'ArrowDown') {
     moveDown()
   } else if (direction === 'ArrowLeft') {
@@ -91,10 +65,6 @@ function drawSnake () {
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
-
-  if (snakeHead.x === appleX && snakeHead.y === appleY) {
-    alert('ate apple')
-  }
 }
 
 function moveUp () {
@@ -117,7 +87,7 @@ function moveUp () {
 function moveRight () {
   // snakeBody[0].x === canvas.width ? alert('Snake hit right wall. Game over!') : snakeBody[0].x += moveX
   snakeBody[0].x === canvas.width ? console.log('Snake hit right wall. Game over!') : snakeBody[0].x += moveX
-
+  // snakeBody[0].x += moveX
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
 
@@ -165,22 +135,13 @@ function moveLeft () {
   }
 }
 
-// function eatApple () {
-//   // const bottom = appleY + 20
-//   // // console.log(bottom)
-//   // const left = appleX
-//   // // console.log(left) // 300
-//   // const right = appleX + 20
-//   // // console.log(right)
-//   // const top = appleY
-//   // console.table(top) // 180
+function eatApple () {
+  if (snakeHead.x === appleX && snakeHead.y === appleY) {
+    console.log('ate apple')
+    // gameOver()
+  }
+}
 
-//   // if (top > bottom || right < left || bottom < top || left > right) {
-//   //   return false
-//   // }
-//   // return true
-//   // const snakeHead = snakeBody[0].x
-//   // if (snakeHead.x === appleX && snakeHead.y === appleY) {
-//   //   alert('ate apple')
-//   // }
+// function gameOver () {
+//   window.location.reload()
 // }
