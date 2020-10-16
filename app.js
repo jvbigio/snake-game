@@ -16,16 +16,29 @@ const snakeBody = [
   { x: 0, y: 80 }
 ]
 
+const tail = [{
+  x: 0,
+  y: 100
+}]
+
+const apple = [{
+  x: 200,
+  y: 250
+}]
+// snakeBody.push(tail)
+
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   drawApple()
-  const framesPerSecond = 20 // 20
+  eatApple()
+  const framesPerSecond = 5 // 20
 
   setInterval(() => {
     drawCanvas()
     drawSnake()
     drawApple()
+    // eatApple()
   }, 1000 / framesPerSecond)
 }
 window.addEventListener('keydown', gameControls)
@@ -56,7 +69,7 @@ function gameControls (e) {
       direction = keyPress
       break
   }
-  e.preventDefault()
+  // e.preventDefault()
 }
 
 function drawCanvas () {
@@ -75,7 +88,7 @@ function drawSnake () {
   if (direction === 'ArrowUp') {
     moveUp()
   } else if (direction === 'ArrowRight') {
-    moveRight()
+    // moveRight()
   } else if (direction === 'ArrowDown') {
     moveDown()
   } else if (direction === 'ArrowLeft') {
@@ -86,10 +99,17 @@ function drawSnake () {
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
+
+  const snakeHead = snakeBody[0].x
+  if (snakeHead + 20 === appleX && snakeHead === appleY) {
+    // console.log('ATE')
+    alert('ATE!!')
+  }
 }
 
 function moveUp () {
-  snakeBody[0].y < 0 ? alert('Snake hit top wall. Game over!') : snakeBody[0].y -= moveY
+  // snakeBody[0].y < 0 ? alert('Snake hit top wall. Game over!') : snakeBody[0].y -= moveY
+  snakeBody[0].y < 0 ? console.log('Snake hit top wall. Game over!') : snakeBody[0].y -= moveY
 
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
@@ -105,7 +125,9 @@ function moveUp () {
 }
 
 function moveRight () {
-  snakeBody[0].x === canvas.width ? alert('Snake hit right wall. Game over!') : snakeBody[0].x += moveX
+  // snakeBody[0].x === canvas.width ? alert('Snake hit right wall. Game over!') : snakeBody[0].x += moveX
+  snakeBody[0].x === canvas.width ? console.log('Snake hit right wall. Game over!') : snakeBody[0].x += moveX
+
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
 
@@ -120,7 +142,8 @@ function moveRight () {
 }
 
 function moveDown () {
-  snakeBody[0].y === canvas.height ? alert('Snake hit bottom wall. Game over!') : snakeBody[0].y += moveY
+  // snakeBody[0].y === canvas.height ? alert('Snake hit bottom wall. Game over!') : snakeBody[0].y += moveY
+  snakeBody[0].y === canvas.height ? console.log('Snake hit bottom wall. Game over!') : snakeBody[0].y += moveY
 
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
@@ -136,7 +159,8 @@ function moveDown () {
 }
 
 function moveLeft () {
-  snakeBody[0].x < 0 ? alert('Snake hit left wall. Game Over!') : snakeBody[0].x -= moveX
+  // snakeBody[0].x < 0 ? alert('Snake hit left wall. Game Over!') : snakeBody[0].x -= moveX
+  snakeBody[0].x < 0 ? console.log('Snake hit left wall. Game Over!') : snakeBody[0].x -= moveX
 
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
@@ -148,5 +172,26 @@ function moveLeft () {
     } else if (snakePart.y > snakeBody[0].y) {
       snakePart.y -= moveY
     }
+  }
+}
+
+function eatApple () {
+ 
+  const bottom = appleY + 20
+  // console.log(bottom)
+  const left = appleX
+  // console.log(left) // 300
+  const right = appleX + 20
+  // console.log(right)
+  const top = appleY
+  // console.table(top) // 180
+
+  // if (top > bottom || right < left || bottom < top || left > right) {
+  //   return false
+  // }
+  // return true
+  const snakeHead = snakeBody[0].x
+  if (snakeHead === left || snakeHead === top) {
+    alert('ATE!!')
   }
 }
