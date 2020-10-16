@@ -20,7 +20,7 @@ window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   drawApple()
-  const framesPerSecond = 20
+  const framesPerSecond = 20 // 20
 
   setInterval(() => {
     drawCanvas()
@@ -31,6 +31,7 @@ window.onload = function () {
 window.addEventListener('keydown', gameControls)
 
 function gameControls (e) {
+  // debugger
   const keyPress = e.key
   switch (keyPress) {
     case 'ArrowUp':
@@ -38,11 +39,14 @@ function gameControls (e) {
       direction = keyPress
       break
     case 'ArrowRight':
-      snakeBody[0].x === canvas.width - 20 ? alert('Snake hit right wall. Game over!') : moveRight()
+      // why does this no longer work after adding lines 71 - 79 conditionals?
+      // snakeBody[0].x === canvas.width - 20 ? alert('Snake hit right wall. Game over!') : moveRight()
+      moveRight()
       direction = keyPress
       break
     case 'ArrowDown':
-      snakeBody[0].y >= canvas.height - snakeHeight ? alert('Snake hit bottom wall. Game over!') : moveDown()
+      // snakeBody[0].y >= canvas.height - snakeHeight ? alert('Snake hit bottom wall. Game over!') : moveDown()
+      moveDown()
       direction = keyPress
       break
     case 'ArrowLeft':
@@ -99,7 +103,7 @@ function moveUp () {
 }
 
 function moveRight () {
-  snakeBody[0].x += moveX
+  snakeBody[0].x === canvas.width ? alert('Snake hit right wall. Game over!') : snakeBody[0].x += moveX
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
 
@@ -114,7 +118,7 @@ function moveRight () {
 }
 
 function moveDown () {
-  snakeBody[0].y += moveY
+  snakeBody[0].y === canvas.height ? alert('Snake hit bottom wall. Game over!') : snakeBody[0].y += moveY
 
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
