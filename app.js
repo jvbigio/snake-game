@@ -33,6 +33,7 @@ window.onload = function () {
     eatApple()
   }, 1000 / framesPerSecond)
 }
+
 window.addEventListener('keydown', e => {
   const keyPress = e.key
   direction = keyPress
