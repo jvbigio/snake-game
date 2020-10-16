@@ -50,7 +50,8 @@ function gameControls (e) {
       direction = keyPress
       break
     case 'ArrowLeft':
-      snakeBody[0].x <= 0 ? alert('Snake hit left wall. Game Over!') : moveLeft()
+      // snakeBody[0].x <= 0 ? alert('Snake hit left wall. Game Over!') : moveLeft()
+      moveLeft()
       direction = keyPress
       break
   }
@@ -134,7 +135,7 @@ function moveDown () {
 }
 
 function moveLeft () {
-  snakeBody[0].x -= moveX
+  snakeBody[0].x < 0 ? alert('Snake hit left wall. Game Over!') : snakeBody[0].x -= moveX
 
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
