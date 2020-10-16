@@ -20,7 +20,7 @@ window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   drawApple()
-  const framesPerSecond = 30
+  const framesPerSecond = 20
 
   setInterval(() => {
     drawCanvas()
@@ -36,7 +36,6 @@ function gameControls (e) {
     case 'ArrowUp':
       snakeBody[0].y <= 0 ? alert('Snake hit top wall. Game over!') : moveUp()
       direction = keyPress
-
       break
     case 'ArrowRight':
       snakeBody[0].x === canvas.width - 20 ? alert('Snake hit right wall. Game over!') : moveRight()
@@ -66,6 +65,15 @@ function drawSnake () {
   for (let i = 1; i < snakeBody.length; i++) {
     const element = snakeBody[i]
     canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
+  }
+  if (direction === 'ArrowUp') {
+    moveUp()
+  } else if (direction === 'ArrowRight') {
+    moveRight()
+  } else if (direction === 'ArrowDown') {
+    moveDown()
+  } else if (direction === 'ArrowLeft') {
+    moveLeft()
   }
 }
 
@@ -103,14 +111,9 @@ function moveRight () {
       snakePart.y -= moveY
     }
   }
-  // move continuously to right
-  snakeBody.forEach(snake => {
-    snake += moveX
-  })
 }
 
 function moveDown () {
-  direction = 'down'
   snakeBody[0].y += moveY
 
   for (let i = 1; i < snakeBody.length; i++) {
@@ -127,7 +130,6 @@ function moveDown () {
 }
 
 function moveLeft () {
-  direction = 'left'
   snakeBody[0].x -= moveX
 
   for (let i = 1; i < snakeBody.length; i++) {
