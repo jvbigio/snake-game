@@ -35,7 +35,8 @@ function gameControls (e) {
   const keyPress = e.key
   switch (keyPress) {
     case 'ArrowUp':
-      snakeBody[0].y <= 0 ? alert('Snake hit top wall. Game over!') : moveUp()
+      // snakeBody[0].y <= 0 ? alert('Snake hit top wall. Game over!') : moveUp()
+      moveUp()
       direction = keyPress
       break
     case 'ArrowRight':
@@ -88,7 +89,7 @@ function drawApple () {
 }
 
 function moveUp () {
-  snakeBody[0].y -= moveY
+  snakeBody[0].y < 0 ? alert('Snake hit top wall. Game over!') : snakeBody[0].y -= moveY
 
   for (let i = 1; i < snakeBody.length; i++) {
     const snakePart = snakeBody[i]
