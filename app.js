@@ -16,22 +16,14 @@ const snakeBody = [
   { x: 0, y: 80 }
 ]
 
-const tail = [{
-  x: 0,
-  y: 100
-}]
-
-const apple = [{
-  x: 200,
-  y: 250
-}]
-// snakeBody.push(tail)
+const snakeHead = snakeBody[0]
+const tail = snakeBody[snakeBody.length - 1]
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   drawApple()
-  eatApple()
+  // eatApple()
   const framesPerSecond = 5 // 20
 
   setInterval(() => {
@@ -100,10 +92,8 @@ function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
 
-  const snakeHead = snakeBody[0].x
-  if (snakeHead + 20 === appleX && snakeHead === appleY) {
-    // console.log('ATE')
-    alert('ATE!!')
+  if (snakeHead.x === appleX && snakeHead.y === appleY) {
+    alert('ate apple')
   }
 }
 
@@ -175,23 +165,22 @@ function moveLeft () {
   }
 }
 
-function eatApple () {
- 
-  const bottom = appleY + 20
-  // console.log(bottom)
-  const left = appleX
-  // console.log(left) // 300
-  const right = appleX + 20
-  // console.log(right)
-  const top = appleY
-  // console.table(top) // 180
+// function eatApple () {
+//   // const bottom = appleY + 20
+//   // // console.log(bottom)
+//   // const left = appleX
+//   // // console.log(left) // 300
+//   // const right = appleX + 20
+//   // // console.log(right)
+//   // const top = appleY
+//   // console.table(top) // 180
 
-  // if (top > bottom || right < left || bottom < top || left > right) {
-  //   return false
-  // }
-  // return true
-  const snakeHead = snakeBody[0].x
-  if (snakeHead === left || snakeHead === top) {
-    alert('ATE!!')
-  }
-}
+//   // if (top > bottom || right < left || bottom < top || left > right) {
+//   //   return false
+//   // }
+//   // return true
+//   // const snakeHead = snakeBody[0].x
+//   // if (snakeHead.x === appleX && snakeHead.y === appleY) {
+//   //   alert('ate apple')
+//   // }
+// }
