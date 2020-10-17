@@ -14,6 +14,10 @@ const snakeBody = [
   { x: 0, y: 80 }
 ]
 
+// let snakeBodyPart = [{
+
+// }]
+
 const snakeHead = snakeBody[0]
 const tail = snakeBody[snakeBody.length - 1]
 
@@ -68,6 +72,12 @@ function drawSnake () {
     const element = snakeBody[i]
     canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
   }
+  // if (eatingApple) {
+  //   for (let i = tail; i < snakeBody.length; i++) {
+  //     canvasContext.fillRect(tail.x, tail.y, 20, snakeHeight)
+  //   }
+  // }
+
   if (direction === 'ArrowUp') {
     moveUp()
   } else if (direction === 'ArrowRight') {
@@ -83,6 +93,11 @@ function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
   // make sure apple isn't randomized on top of snake (not working yet)
+  if (eatingApple) {
+    console.log(snakeBody)
+    console.log(tail)
+    // snakeBody.push()
+  }
 }
 
 function newApple () {
@@ -161,6 +176,11 @@ function ateApple () {
     playerScore++
     eatingApple = true
   }
+  // canvasContext.fillStyle = 'blue'
+  // for (let i = tail; i < snakeBody.length; i++) {
+  //   const element = snakeBody[i]
+  //   canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
+  // }
 }
 
 // why does updatingScore only work if it's placed inside setInterval. Why is most things only working when placed in setInterval?????
