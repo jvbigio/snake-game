@@ -24,6 +24,7 @@ const randomY = Math.random() * (580 + 20)
 let appleY = randomY - (randomY % 20)
 let eatingApple = false
 let apple
+
 function newApple () {
   apple = {
     x: appleX,
