@@ -25,7 +25,6 @@ window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   let gameRefreshTime = 100
-
   if (DEBUG) {
     appleX = 120
     appleY = 80
@@ -78,7 +77,7 @@ function drawApple () {
 
   // draw new apple location when apple eaten
   if (eatingApple) {
-    console.log(eatingApple)
+    // console.log(eatingApple)
   //   // canvasContext.fillRect(appleX, appleY, 20, 20)
   //   // console.log(appleX, appleY)
   }
@@ -149,6 +148,7 @@ function moveLeft () {
 
 function eatApple () {
   if (snakeHead.x === appleX && snakeHead.y === appleY) {
+    // alert('ate apple')
     console.log('ate apple')
     eatingApple = true
   }
