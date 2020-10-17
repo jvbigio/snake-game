@@ -169,7 +169,7 @@ function moveLeft () {
 
 function ateApple () {
   // console.log(eatingApple) // false
-  if (snakeHead.x === appleX && snakeHead.y === appleY) { // orig
+  if (snakeHead.x === appleX && snakeHead.y === appleY) {
     console.log('ate apple')
     // alert('ate apple')
     playerScore++
