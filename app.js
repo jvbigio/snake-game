@@ -22,7 +22,6 @@ const tail = snakeBody[snakeBody.length - 1]
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
-  drawApple()
   const framesPerSecond = 5 // 20
 
   setInterval(() => {
