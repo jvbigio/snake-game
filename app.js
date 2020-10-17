@@ -44,7 +44,7 @@ function drawCanvas () {
 
 function drawSnake () {
   canvasContext.fillStyle = '#303030'
-  canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
+  canvasContext.fillRect(snakeHead.x, snakeHead.y, 20, snakeHeight)
   canvasContext.fillStyle = 'blue'
   for (let i = 1; i < snakeBody.length; i++) {
     const element = snakeBody[i]
