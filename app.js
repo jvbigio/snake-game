@@ -1,15 +1,5 @@
 let canvas
 let canvasContext
-const snakeHeight = 20
-const moveX = 20
-const moveY = 20
-const randomX = Math.random() * (780 + 20)
-let appleX = randomX - (randomX % 20)
-const randomY = Math.random() * (580 + 20)
-let appleY = randomY - (randomY % 20)
-let eatingApple = false
-const DEBUG = true
-let direction
 
 const snakeBody = [
   { x: 60, y: 80 },
@@ -17,27 +7,52 @@ const snakeBody = [
   { x: 20, y: 80 },
   { x: 0, y: 80 }
 ]
-
 const snakeHead = snakeBody[0]
 const tail = snakeBody[snakeBody.length - 1]
+const snakeHeight = 20
+
+const moveX = 20
+const moveY = 20
+let direction
+
+const score = document.querySelector('.points')
+let playerScore = 0
+
+const randomX = Math.random() * (780 + 20)
+let appleX = randomX - (randomX % 20)
+const randomY = Math.random() * (580 + 20)
+let appleY = randomY - (randomY % 20)
+let eatingApple = false
+let apple
+function newApple () {
+  apple = {
+    x: appleX,
+    y: appleY
+  }
+  return apple
+}
+
+const DEBUG = true
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
-  let gameRefreshTime = 100
+  let gameInterval = 100
+
   if (DEBUG) {
     appleX = 120
     appleY = 80
 
-    gameRefreshTime = 1000
+    gameInterval = 1000
   }
 
   setInterval(() => {
     drawCanvas()
     drawSnake()
     drawApple()
-    eatApple()
-  }, gameRefreshTime)
+    ateApple()
+    updateScore()
+  }, gameInterval)
 }
 
 window.addEventListener('keydown', e => {
@@ -72,14 +87,11 @@ function drawSnake () {
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
-  // TODO:
   // make sure apple isn't randomized on top of snake (not working yet)
 
-  // draw new apple location when apple eaten
+  // draw new apple location when apple eaten (not working yet)
   if (eatingApple) {
-    // console.log(eatingApple)
-  //   // canvasContext.fillRect(appleX, appleY, 20, 20)
-  //   // console.log(appleX, appleY)
+    apple = newApple()
   }
 }
 
@@ -146,11 +158,19 @@ function moveLeft () {
   }
 }
 
-function eatApple () {
+function ateApple () {
   if (snakeHead.x === appleX && snakeHead.y === appleY) {
-    // alert('ate apple')
     console.log('ate apple')
+    playerScore++
     eatingApple = true
+  }
+}
+
+// why does updatingScore only work if it's placed inside setInterval. Why is most things only working when placed in setInterval?????
+function updateScore () {
+  if (eatingApple) {
+    score.textContent = playerScore
+    return playerScore
   }
 }
 
