@@ -42,6 +42,16 @@ header {
 
 .points {
   color: #b11b1b;
+  font-weight: bold;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  0% { color: orangered; }
+  50% { color: #b11b1b; }
+  100% { color: orangered; }
 }
 
 .canvas-container {
@@ -67,3 +77,9 @@ header {
 .instructions {
   text-align: center;
 }
+
+/* 
+images to maybe implement in game over modal
+
+https://i.postimg.cc/2Sn1gNt1/snake-img.jpg
+*/
