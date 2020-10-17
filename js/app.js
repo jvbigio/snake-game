@@ -184,3 +184,5 @@ function updateScore () {
     return playerScore
   }
 }
+
+export { playerScore }

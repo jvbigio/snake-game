@@ -1,3 +1,4 @@
+import { playerScore } from './app.js'
 const bodyBlackout = document.querySelector('.body-blackout')
 const popupModal = document.querySelector('.popup-modal')
 
@@ -16,6 +17,7 @@ function gameOver () {
     bodyBlackout.classList.remove('is-blacked-out')
     window.location.reload()
   })
+  playerScore = 0
 }
 
 export default gameOver
