@@ -4,9 +4,11 @@ const snakeHeight = 20
 const moveX = 20
 const moveY = 20
 const randomX = Math.random() * (780 + 20)
-const appleX = randomX - (randomX % 20)
+let appleX = randomX - (randomX % 20)
 const randomY = Math.random() * (580 + 20)
-const appleY = randomY - (randomY % 20)
+let appleY = randomY - (randomY % 20)
+let eatingApple = false
+const DEBUG = true
 let direction
 
 const snakeBody = [
@@ -22,14 +24,21 @@ const tail = snakeBody[snakeBody.length - 1]
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
-  const framesPerSecond = 10 // 20
+  let gameRefreshTime = 100
+
+  if (DEBUG) {
+    appleX = 120
+    appleY = 80
+
+    gameRefreshTime = 1000
+  }
 
   setInterval(() => {
     drawCanvas()
     drawSnake()
     drawApple()
     eatApple()
-  }, 1000 / framesPerSecond)
+  }, gameRefreshTime)
 }
 
 window.addEventListener('keydown', e => {
@@ -64,6 +73,15 @@ function drawSnake () {
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
+  // TODO:
+  // make sure apple isn't randomized on top of snake (not working yet)
+
+  // draw new apple location when apple eaten
+  if (eatingApple) {
+    console.log(eatingApple)
+  //   // canvasContext.fillRect(appleX, appleY, 20, 20)
+  //   // console.log(appleX, appleY)
+  }
 }
 
 function moveUp () {
@@ -132,7 +150,7 @@ function moveLeft () {
 function eatApple () {
   if (snakeHead.x === appleX && snakeHead.y === appleY) {
     console.log('ate apple')
-    // gameOver()
+    eatingApple = true
   }
 }
 
