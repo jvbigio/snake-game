@@ -69,11 +69,6 @@ header {
   align-items: center;
 }
 
-#gameCanvas {
-  /* display: flex;
-  justify-content: center; */
-}
-
 .apple-icon {
   color: #b11b1b;
 }
@@ -96,10 +91,6 @@ header {
   height: 100%;
   background-color: rgba(0, 0, 0, .65);
   display: none;
-
-  /* &.is-blacked-out {
-    display: block;
-  } */
 }
 
 .is-blacked-out {
@@ -111,7 +102,6 @@ header {
   text-align: center;
   background: url('https://i.postimg.cc/2Sn1gNt1/snake-img.jpg');
   width: 650px;
-  /* background-color: #fff; */
   color: #f2f3f4;
   position: absolute;
   left: 50%;
@@ -136,9 +126,4 @@ __close {
   right: -10px;
   top: -10px;
   cursor: pointer;
-
-  /* 
-images to maybe implement in game over modal
-
-https://i.postimg.cc/2Sn1gNt1/snake-img.jpg
-*/
+}
