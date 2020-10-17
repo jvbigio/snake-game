@@ -40,6 +40,10 @@ header {
   font-size: 2rem;
 }
 
+.points {
+  color: #b11b1b;
+}
+
 .canvas-container {
   border: 3px solid black;
   display: flex;
