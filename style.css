@@ -49,9 +49,17 @@ header {
 }
 
 @keyframes blink {
-  0% { color: orangered; }
-  50% { color: #b11b1b; }
-  100% { color: orangered; }
+  0% {
+    color: orangered;
+  }
+
+  50% {
+    color: #b11b1b;
+  }
+
+  100% {
+    color: orangered;
+  }
 }
 
 .canvas-container {
@@ -78,7 +86,58 @@ header {
   text-align: center;
 }
 
-/* 
+/* Modal */
+.body-blackout {
+  position: absolute;
+  z-index: 1010;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .65);
+  display: none;
+
+  /* &.is-blacked-out {
+    display: block;
+  } */
+}
+
+.is-blacked-out {
+  display: block;
+}
+
+.popup-modal {
+  height: 365px;
+  text-align: center;
+  background: url('https://i.postimg.cc/2Sn1gNt1/snake-img.jpg');
+  width: 650px;
+  /* background-color: #fff; */
+  color: #f2f3f4;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 45px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 300ms ease-in-out;
+  z-index: 1011;
+  border-radius: 25%;
+}
+
+.is--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+__close {
+  position: absolute;
+  font-size: 1.2rem;
+  right: -10px;
+  top: -10px;
+  cursor: pointer;
+
+  /* 
 images to maybe implement in game over modal
 
 https://i.postimg.cc/2Sn1gNt1/snake-img.jpg
