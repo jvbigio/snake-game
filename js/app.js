@@ -91,10 +91,8 @@ function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
   // make sure apple isn't randomized on top of snake (not working yet)
-  // draw new apple location when apple eaten
   if (eatingApple) {
-    console.log(eatingApple)
-    apple = newApple()
+    // draw new apple location when apple eaten
   }
 }
 
