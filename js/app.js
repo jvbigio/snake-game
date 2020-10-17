@@ -14,6 +14,8 @@ const snakeBody = [
   { x: 0, y: 80 }
 ]
 
+// grow snake:
+// try unshift. moving snake head over
 // let snakeBodyPart = [{
 
 // }]
