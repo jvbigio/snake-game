@@ -18,32 +18,24 @@ const snakeHead = snakeBody[0]
 const tail = snakeBody[snakeBody.length - 1]
 
 const randomX = Math.random() * (780 + 20)
-let appleX = randomX - (randomX % 20)
+let appleX, appleY
 const randomY = Math.random() * (580 + 20)
-let appleY = randomY - (randomY % 20)
+
 let eatingApple = false
 
 const score = document.querySelector('.points')
 let playerScore = 0
 
-const DEBUG = false
-
-// let apple
-// function newApple () {
-//   apple = {
-//     x: appleX,
-//     y: appleY
-//   }
-//   return apple
-// }
+const DEBUG = true
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   let gameInterval = 100
+  newApple()
 
   if (DEBUG) {
-    appleX = 120
+    appleX = 100
     appleY = 80
 
     gameInterval = 1000
@@ -51,8 +43,8 @@ window.onload = function () {
 
   setInterval(() => {
     drawCanvas()
-    drawSnake()
     drawApple()
+    drawSnake()
     ateApple()
     updateScore()
   }, gameInterval)
@@ -91,9 +83,13 @@ function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
   // make sure apple isn't randomized on top of snake (not working yet)
-  if (eatingApple) {
-    // draw new apple location when apple eaten
-  }
+}
+
+function newApple () {
+  const randomX = Math.random() * (780 + 20)
+  appleX = randomX - (randomX % 20)
+  const randomY = Math.random() * (580 + 20)
+  appleY = randomY - (randomY % 20)
 }
 
 function moveUp () {
@@ -158,20 +154,10 @@ function moveLeft () {
     }
   }
 }
-// function newApple () {
-//   const randomX = Math.random() * (780 + 80)
-//   // appleX = randomX - (randomX % 20)
-//   appleX = randomX - (randomX % 20)
-//   const randomY = Math.random() * (580 + 100)
-//   appleY = randomY - (randomY % 20)
-//   return [appleX, appleY]
-// }
 
 function ateApple () {
-  // console.log(eatingApple) // false
   if (snakeHead.x === appleX && snakeHead.y === appleY) {
-    console.log('ate apple')
-    // alert('ate apple')
+    newApple()
     playerScore++
     eatingApple = true
   }
