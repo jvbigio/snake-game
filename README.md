@@ -2,7 +2,7 @@
 
 A simple yet fun take on the classic snake game, written in vanilla JavaScript, HTML, and CSS.
 
-Play [here](https://jvbigio.github.io/expense-tracker/)
+Play [here](https://jvbigio.github.io/snake-game/)
 
 # Image
 
