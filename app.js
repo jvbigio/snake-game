@@ -1,4 +1,3 @@
-import gameOver from './modal.js'
 
 let canvas
 let canvasContext
@@ -102,6 +101,19 @@ function drawApple () {
   }
 }
 
+function ateApple () {
+  if (snakeHead.x === appleX && snakeHead.y === appleY) {
+    newApple()
+    playerScore++
+    eatingApple = true
+  }
+  // canvasContext.fillStyle = 'blue'
+  // for (let i = tail; i < snakeBody.length; i++) {
+  //   const element = snakeBody[i]
+  //   canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
+  // }
+}
+
 function newApple () {
   const randomX = Math.random() * (780 + 20)
   appleX = randomX - (randomX % 20)
@@ -172,19 +184,6 @@ function moveLeft () {
   }
 }
 
-function ateApple () {
-  if (snakeHead.x === appleX && snakeHead.y === appleY) {
-    newApple()
-    playerScore++
-    eatingApple = true
-  }
-  // canvasContext.fillStyle = 'blue'
-  // for (let i = tail; i < snakeBody.length; i++) {
-  //   const element = snakeBody[i]
-  //   canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
-  // }
-}
-
 // why does updatingScore only work if it's placed inside setInterval. Why is most things only working when placed in setInterval?????
 function updateScore () {
   if (eatingApple) {
@@ -193,4 +192,24 @@ function updateScore () {
   }
 }
 
-export { playerScore }
+// MODAL //
+const bodyBlackout = document.querySelector('.body-blackout')
+const popupModal = document.querySelector('.popup-modal')
+
+function gameOver () {
+  popupModal.classList.add('is--visible')
+  bodyBlackout.classList.add('is-blacked-out')
+
+  popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
+    popupModal.classList.remove('is--visible')
+    bodyBlackout.classList.remove('is-blacked-out')
+    window.location.reload()
+  })
+
+  bodyBlackout.addEventListener('click', () => {
+    popupModal.classList.remove('is--visible')
+    bodyBlackout.classList.remove('is-blacked-out')
+    window.location.reload()
+  })
+  playerScore = 0
+}
