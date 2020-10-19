@@ -94,9 +94,7 @@ function drawApple () {
 }
 
 function ateApple () {
-  // keep line below. Original, works, just testing snake ALMOST ABOUT TO EAT APPLE:
-  // if (snakeHead.x === appleX && snakeHead.y === appleY) { // KEEP
-  if (snakeHead.x + moveX === appleX && snakeHead.y === appleY) {
+  if (snakeHead.x === appleX && snakeHead.y === appleY) {
     eatingApple = true
     newApple()
     growSnake()
@@ -105,7 +103,6 @@ function ateApple () {
 }
 
 function newApple () {
-  eatingApple = false
   const randomX = Math.random() * (780 + 20)
   appleX = randomX - (randomX % 20)
   const randomY = Math.random() * (580 + 20)
