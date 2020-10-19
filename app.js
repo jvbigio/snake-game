@@ -12,15 +12,13 @@ const snakeBody = [
   { x: 20, y: 80 },
   { x: 0, y: 80 }
 ]
-
 const snakeHead = snakeBody[0]
 const tail = snakeBody[snakeBody.length - 1]
 
-const randomX = Math.random() * (780 + 20)
-let appleX, appleY
-const randomY = Math.random() * (580 + 20)
-
+let appleX = 0
+let appleY = 0
 let eatingApple = false
+newApple()
 
 const score = document.querySelector('.points')
 let playerScore = 0
@@ -33,7 +31,7 @@ window.onload = function () {
   let gameInterval = 100
 
   if (DEBUG) {
-    appleX = 100
+    appleX = 120
     appleY = 80
 
     gameInterval = 1000
@@ -78,28 +76,41 @@ function drawSnake () {
   }
 }
 
+function growSnake () {
+  // if (eatingApple) {
+  //   const newSnake = snakeBody.unshift(snakeBody[0])
+  //   // for (let i = 2; i < newSnake.length; i++) {
+  //   snakeHead = newSnake[0]
+  //   // }
+  //   canvasContext.fillStyle = '#303030'
+  //   canvasContext.fillRect(snakeHead.x, snakeHead.y, 20, snakeHeight)
+  // }
+}
+
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
-  // make sure apple isn't randomized on top of snake (not working yet)
-  if (eatingApple) {
-    console.log(snakeBody)
-  }
+  eatingApple = false
 }
 
 function ateApple () {
-  if (snakeHead.x === appleX && snakeHead.y === appleY) {
-    newApple()
-    playerScore++
+  // keep line below. Original, works, just testing snake ALMOST ABOUT TO EAT APPLE:
+  // if (snakeHead.x === appleX && snakeHead.y === appleY) { // KEEP
+  if (snakeHead.x + moveX === appleX && snakeHead.y === appleY) {
     eatingApple = true
+    newApple()
+    growSnake()
+    playerScore++
   }
 }
 
 function newApple () {
+  eatingApple = false
   const randomX = Math.random() * (780 + 20)
   appleX = randomX - (randomX % 20)
   const randomY = Math.random() * (580 + 20)
   appleY = randomY - (randomY % 20)
+  // check if apple x, apple y is on top of snake:
 }
 
 function moveUp () {
@@ -165,7 +176,6 @@ function moveLeft () {
   }
 }
 
-// why does updatingScore only work if it's placed inside setInterval. Why is most things only working when placed in setInterval?????
 function updateScore () {
   if (eatingApple) {
     score.textContent = playerScore
