@@ -13,12 +13,6 @@ const snakeBody = [
   { x: 0, y: 80 }
 ]
 
-// grow snake:
-// try unshift. moving snake head over
-// let snakeBodyPart = [{
-
-// }]
-
 const snakeHead = snakeBody[0]
 const tail = snakeBody[snakeBody.length - 1]
 
@@ -31,13 +25,12 @@ let eatingApple = false
 const score = document.querySelector('.points')
 let playerScore = 0
 
-const DEBUG = true
+const DEBUG = false
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   let gameInterval = 100
-  newApple()
 
   if (DEBUG) {
     appleX = 100
@@ -73,11 +66,6 @@ function drawSnake () {
     const element = snakeBody[i]
     canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
   }
-  // if (eatingApple) {
-  //   for (let i = tail; i < snakeBody.length; i++) {
-  //     canvasContext.fillRect(tail.x, tail.y, 20, snakeHeight)
-  //   }
-  // }
 
   if (direction === 'ArrowUp') {
     moveUp()
@@ -96,8 +84,6 @@ function drawApple () {
   // make sure apple isn't randomized on top of snake (not working yet)
   if (eatingApple) {
     console.log(snakeBody)
-    console.log(tail)
-    // snakeBody.push()
   }
 }
 
@@ -107,11 +93,6 @@ function ateApple () {
     playerScore++
     eatingApple = true
   }
-  // canvasContext.fillStyle = 'blue'
-  // for (let i = tail; i < snakeBody.length; i++) {
-  //   const element = snakeBody[i]
-  //   canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
-  // }
 }
 
 function newApple () {
