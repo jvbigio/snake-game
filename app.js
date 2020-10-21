@@ -23,7 +23,7 @@ newApple()
 const score = document.querySelector('.points')
 let playerScore = 0
 
-const DEBUG = false
+const DEBUG = true
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
@@ -49,6 +49,7 @@ window.onload = function () {
 window.addEventListener('keydown', e => {
   const keyPress = e.key
   direction = keyPress
+  debugger
 })
 
 function drawCanvas () {
@@ -77,14 +78,19 @@ function drawSnake () {
 }
 
 function growSnake () {
-  // if (eatingApple) {
-  //   const newSnake = snakeBody.unshift(snakeBody[0])
-  //   // for (let i = 2; i < newSnake.length; i++) {
-  //   snakeHead = newSnake[0]
-  //   // }
-  //   canvasContext.fillStyle = '#303030'
-  //   canvasContext.fillRect(snakeHead.x, snakeHead.y, 20, snakeHeight)
-  // }
+  canvasContext.fillStyle = '#303030'
+  snakeBody.unshift(snakeBody[0])
+  canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
+  canvasContext.fillStyle = 'blue'
+  for (let i = 1; i < snakeBody.length; i++) {
+    const element = snakeBody[i]
+
+    // skip an iteration???
+    if (element === 1) {
+      continue
+    }
+    canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
+  }
 }
 
 function drawApple () {
