@@ -49,7 +49,6 @@ window.onload = function () {
 window.addEventListener('keydown', e => {
   const keyPress = e.key
   direction = keyPress
-  debugger
 })
 
 function drawCanvas () {
