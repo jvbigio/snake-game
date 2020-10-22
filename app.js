@@ -7,6 +7,8 @@ const moveY = 20
 let direction
 
 const snakeBody = [
+  { x: 100, y: 80 },
+  { x: 80, y: 80 },
   { x: 60, y: 80 },
   { x: 40, y: 80 },
   { x: 20, y: 80 },
@@ -29,7 +31,7 @@ window.onload = function () {
   let gameInterval = 100
 
   if (DEBUG) {
-    appleX = 120
+    appleX = 160
     appleY = 80
 
     gameInterval = 1000
@@ -38,6 +40,7 @@ window.onload = function () {
   setInterval(() => {
     drawCanvas()
     drawApple()
+    moveSnake()
     drawSnake()
     ateApple()
     updateScore()
@@ -62,7 +65,9 @@ function drawSnake () {
     const element = snakeBody[i]
     canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
   }
+}
 
+function moveSnake () {
   if (direction === 'ArrowUp') {
     moveUp()
   } else if (direction === 'ArrowRight') {
