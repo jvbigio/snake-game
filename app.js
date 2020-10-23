@@ -6,6 +6,7 @@ const moveX = 20
 const moveY = 20
 let direction
 
+// added two body parts for testing
 const snakeBody = [
   { x: 100, y: 80 },
   { x: 80, y: 80 },
@@ -32,6 +33,7 @@ window.onload = function () {
 
   if (DEBUG) {
     appleX = 160
+    // appleX = 120
     appleY = 80
 
     gameInterval = 1000
@@ -42,6 +44,7 @@ window.onload = function () {
     drawApple()
     moveSnake()
     drawSnake()
+    wallCollision()
     ateApple()
     updateScore()
   }, gameInterval)
@@ -68,14 +71,27 @@ function drawSnake () {
 }
 
 function moveSnake () {
+  if (!direction) { return }
+  /*
+   Get snake to move like links in a chain:
+  The head moves independently from body.
+
+  Before we move snake head (we actually wanna move snake head 2nd), start with the tail. Move tail to where 2nd to last body piece was, 2nd to last to where 3rd to last was and 3rd to last to where head used to be then move the head
+  */
+  // Loop through snake backwards
+  for (let i = snakeBody.length - 1; i > 0; i--) {
+    snakeBody[i].x = snakeBody[i - 1].x
+    snakeBody[i].y = snakeBody[i - 1].y
+  }
+
   if (direction === 'ArrowUp') {
-    moveUp()
+    snakeBody[0].y -= moveY
   } else if (direction === 'ArrowRight') {
-    moveRight()
+    snakeBody[0].x += moveX
   } else if (direction === 'ArrowDown') {
-    moveDown()
+    snakeBody[0].y += moveY
   } else if (direction === 'ArrowLeft') {
-    moveLeft()
+    snakeBody[0].x -= moveX
   }
 }
 
@@ -118,68 +134,74 @@ function newApple () {
   // check if apple x, apple y is on top of snake:
 }
 
-function moveUp () {
-  snakeBody[0].y < 0 ? gameOver() : snakeBody[0].y -= moveY
-
-  for (let i = 1; i < snakeBody.length; i++) {
-    const snakePart = snakeBody[i]
-
-    if (snakePart.x < snakeBody[0].x) {
-      snakePart.x += moveX
-    } else if (snakePart.x > snakeBody[0].x) {
-      snakePart.x -= moveX
-    } else {
-      snakePart.y -= moveY
-    }
+function wallCollision () {
+  if (snakeBody[0].y < 0 || snakeBody[0].y === canvas.height || snakeBody[0].x === canvas.width || snakeBody[0].x < 0) {
+    gameOver()
   }
 }
 
-function moveDown () {
-  snakeBody[0].y === canvas.height ? gameOver() : snakeBody[0].y += moveY
+// function moveUp () {
+//   snakeBody[0].y < 0 ? gameOver() : snakeBody[0].y -= moveY
 
-  for (let i = 1; i < snakeBody.length; i++) {
-    const snakePart = snakeBody[i]
+//   for (let i = 1; i < snakeBody.length; i++) {
+//     const snakePart = snakeBody[i]
 
-    if (snakePart.x < snakeBody[0].x) {
-      snakePart.x += moveX
-    } else if (snakePart.x > snakeBody[0].x) {
-      snakePart.x -= moveX
-    } else {
-      snakePart.y += moveY
-    }
-  }
-}
+//     if (snakePart.x < snakeBody[0].x) {
+//       snakePart.x += moveX
+//     } else if (snakePart.x > snakeBody[0].x) {
+//       snakePart.x -= moveX
+//     } else {
+//       snakePart.y -= moveY
+//     }
+//   }
+// }
 
-function moveRight () {
-  snakeBody[0].x === canvas.width ? gameOver() : snakeBody[0].x += moveX
+// function moveDown () {
+//   snakeBody[0].y === canvas.height ? gameOver() : snakeBody[0].y += moveY
 
-  for (let i = 1; i < snakeBody.length; i++) {
-    const snakePart = snakeBody[i]
+//   for (let i = 1; i < snakeBody.length; i++) {
+//     const snakePart = snakeBody[i]
 
-    if (snakePart.y === snakeBody[0].y) {
-      snakePart.x += moveX
-    } else if (snakePart.y < snakeBody[0].y) {
-      snakePart.y += moveY
-    } else if (snakePart.y > snakeBody[0].y) {
-      snakePart.y -= moveY
-    }
-  }
-}
-function moveLeft () {
-  snakeBody[0].x < 0 ? gameOver() : snakeBody[0].x -= moveX
+//     if (snakePart.x < snakeBody[0].x) {
+//       snakePart.x += moveX
+//     } else if (snakePart.x > snakeBody[0].x) {
+//       snakePart.x -= moveX
+//     } else {
+//       snakePart.y += moveY
+//     }
+//   }
+// }
 
-  for (let i = 1; i < snakeBody.length; i++) {
-    const snakePart = snakeBody[i]
+// function moveRight () {
+//   snakeBody[0].x === canvas.width ? gameOver() : snakeBody[0].x += moveX
 
-    if (snakePart.y === snakeBody[0].y) {
-      snakePart.x -= moveX
-    } else if (snakePart.y < snakeBody[0].y) {
-      snakePart.y += moveY
-    } else if (snakePart.y > snakeBody[0].y) {
-      snakePart.y -= moveY
-    }
-  }
-}
+//   for (let i = 1; i < snakeBody.length; i++) {
+//     const snakePart = snakeBody[i]
+
+//     if (snakePart.y === snakeBody[0].y) {
+//       snakePart.x += moveX
+//     } else if (snakePart.y < snakeBody[0].y) {
+//       snakePart.y += moveY
+//     } else if (snakePart.y > snakeBody[0].y) {
+//       snakePart.y -= moveY
+//     }
+//   }
+// }
+// function moveLeft () {
+//   snakeBody[0].x < 0 ? gameOver() : snakeBody[0].x -= moveX
+
+//   for (let i = 1; i < snakeBody.length; i++) {
+//     const snakePart = snakeBody[i]
+
+//     if (snakePart.y === snakeBody[0].y) {
+//       snakePart.x -= moveX
+//     } else if (snakePart.y < snakeBody[0].y) {
+//       snakePart.y += moveY
+//     } else if (snakePart.y > snakeBody[0].y) {
+//       snakePart.y -= moveY
+//     }
+//   }
+// }
 
 function updateScore () {
   if (eatingApple) {
