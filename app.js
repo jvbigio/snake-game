@@ -42,13 +42,23 @@ window.onload = function () {
   setInterval(() => {
     drawCanvas()
     drawApple()
-    moveSnake()
+    // check to see if snake is about to eat apple
+    const isSnakeAboutToEatApple = false
+    if (isSnakeAboutToEatApple) {
+      // if so then grow apple
+      // clone current head
+      // move the clone in the current direction
+    } else {
+      moveSnake() // see todo notes
+    }
     drawSnake()
     wallCollision()
     ateApple()
     updateScore()
   }, gameInterval)
 }
+
+// TODO: you don't always want to move the snake. say snake is 2 length, just when its about to hit apple, we want to check if snake is about to eat apple, stop moving snake, add new head piece where apple is (left, right, up, down). otherwise, go ahead and keep moving
 
 window.addEventListener('keydown', e => {
   const keyPress = e.key
