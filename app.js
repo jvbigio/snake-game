@@ -47,7 +47,15 @@ window.onload = function () {
     if (isSnakeAboutToEatApple) {
       // if so then grow apple
       // clone current head
+
       // move the clone in the current direction
+
+      // add clone to the beginning of the snakeBody array
+
+      // add score
+
+      // move apple position
+
     } else {
       moveSnake() // see todo notes
     }
