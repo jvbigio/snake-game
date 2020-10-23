@@ -158,69 +158,6 @@ function wallCollision () {
   }
 }
 
-// function moveUp () {
-//   snakeBody[0].y < 0 ? gameOver() : snakeBody[0].y -= moveY
-
-//   for (let i = 1; i < snakeBody.length; i++) {
-//     const snakePart = snakeBody[i]
-
-//     if (snakePart.x < snakeBody[0].x) {
-//       snakePart.x += moveX
-//     } else if (snakePart.x > snakeBody[0].x) {
-//       snakePart.x -= moveX
-//     } else {
-//       snakePart.y -= moveY
-//     }
-//   }
-// }
-
-// function moveDown () {
-//   snakeBody[0].y === canvas.height ? gameOver() : snakeBody[0].y += moveY
-
-//   for (let i = 1; i < snakeBody.length; i++) {
-//     const snakePart = snakeBody[i]
-
-//     if (snakePart.x < snakeBody[0].x) {
-//       snakePart.x += moveX
-//     } else if (snakePart.x > snakeBody[0].x) {
-//       snakePart.x -= moveX
-//     } else {
-//       snakePart.y += moveY
-//     }
-//   }
-// }
-
-// function moveRight () {
-//   snakeBody[0].x === canvas.width ? gameOver() : snakeBody[0].x += moveX
-
-//   for (let i = 1; i < snakeBody.length; i++) {
-//     const snakePart = snakeBody[i]
-
-//     if (snakePart.y === snakeBody[0].y) {
-//       snakePart.x += moveX
-//     } else if (snakePart.y < snakeBody[0].y) {
-//       snakePart.y += moveY
-//     } else if (snakePart.y > snakeBody[0].y) {
-//       snakePart.y -= moveY
-//     }
-//   }
-// }
-// function moveLeft () {
-//   snakeBody[0].x < 0 ? gameOver() : snakeBody[0].x -= moveX
-
-//   for (let i = 1; i < snakeBody.length; i++) {
-//     const snakePart = snakeBody[i]
-
-//     if (snakePart.y === snakeBody[0].y) {
-//       snakePart.x -= moveX
-//     } else if (snakePart.y < snakeBody[0].y) {
-//       snakePart.y += moveY
-//     } else if (snakePart.y > snakeBody[0].y) {
-//       snakePart.y -= moveY
-//     }
-//   }
-// }
-
 function updateScore () {
   if (eatingApple) {
     score.textContent = playerScore
