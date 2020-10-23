@@ -72,13 +72,7 @@ function drawSnake () {
 
 function moveSnake () {
   if (!direction) { return }
-  /*
-   Get snake to move like links in a chain:
-  The head moves independently from body.
 
-  Before we move snake head (we actually wanna move snake head 2nd), start with the tail. Move tail to where 2nd to last body piece was, 2nd to last to where 3rd to last was and 3rd to last to where head used to be then move the head
-  */
-  // Loop through snake backwards
   for (let i = snakeBody.length - 1; i > 0; i--) {
     snakeBody[i].x = snakeBody[i - 1].x
     snakeBody[i].y = snakeBody[i - 1].y
