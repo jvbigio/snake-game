@@ -8,8 +8,8 @@ let direction
 
 // added two body parts for testing
 const snakeBody = [
-  { x: 100, y: 80 },
-  { x: 80, y: 80 },
+  // { x: 100, y: 80 },
+  // { x: 80, y: 80 },
   { x: 60, y: 80 },
   { x: 40, y: 80 },
   { x: 20, y: 80 },
@@ -18,7 +18,7 @@ const snakeBody = [
 
 let appleX = 0
 let appleY = 0
-let eatingApple = false
+let eatingApple
 newApple()
 
 const score = document.querySelector('.points')
@@ -32,8 +32,8 @@ window.onload = function () {
   let gameInterval = 100
 
   if (DEBUG) {
-    appleX = 160
-    // appleX = 120
+    // appleX = 160
+    appleX = 120
     appleY = 80
 
     gameInterval = 1000
@@ -43,11 +43,13 @@ window.onload = function () {
     drawCanvas()
     drawApple()
     // check to see if snake is about to eat apple
-    const isSnakeAboutToEatApple = false
-    if (isSnakeAboutToEatApple) {
+    eatingApple = false
+    if (eatingApple) {
+      console.log(eatingApple)
       // if so then grow apple
       // clone current head
-
+      const clonedHead = snakeBody.unshift(snakeBody[0])
+      console.log(clonedHead)
       // move the clone in the current direction
 
       // add clone to the beginning of the snakeBody array
@@ -55,7 +57,6 @@ window.onload = function () {
       // add score
 
       // move apple position
-
     } else {
       moveSnake() // see todo notes
     }
@@ -90,13 +91,7 @@ function drawSnake () {
 
 function moveSnake () {
   if (!direction) { return }
-  /*
-   Get snake to move like links in a chain:
-  The head moves independently from body.
 
-  Before we move snake head (we actually wanna move snake head 2nd), start with the tail. Move tail to where 2nd to last body piece was, 2nd to last to where 3rd to last was and 3rd to last to where head used to be then move the head
-  */
-  // Loop through snake backwards
   for (let i = snakeBody.length - 1; i > 0; i--) {
     snakeBody[i].x = snakeBody[i - 1].x
     snakeBody[i].y = snakeBody[i - 1].y
@@ -114,19 +109,19 @@ function moveSnake () {
 }
 
 function growSnake () {
-  canvasContext.fillStyle = '#303030'
-  snakeBody.unshift(snakeBody[0])
-  canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
-  canvasContext.fillStyle = 'blue'
-  for (let i = 1; i < snakeBody.length; i++) {
-    const element = snakeBody[i]
+  // canvasContext.fillStyle = '#303030'
+  // snakeBody.unshift(snakeBody[0])
+  // canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
+  // canvasContext.fillStyle = 'blue'
+  // for (let i = 1; i < snakeBody.length; i++) {
+  //   const element = snakeBody[i]
 
-    // skip an iteration???
-    if (element === 1) {
-      continue
-    }
-    canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
-  }
+  //   // skip an iteration???
+  //   if (element === 1) {
+  //     continue
+  //   }
+  //   canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
+  // }
 }
 
 function drawApple () {
@@ -136,7 +131,10 @@ function drawApple () {
 }
 
 function ateApple () {
-  if (snakeBody[0].x === appleX && snakeBody[0].y === appleY) {
+  // if (snakeBody[0].x === appleX && snakeBody[0].y === appleY) {
+  // if ((snakeBody[0].x + 20 === appleX) && (snakeBody[0].y === appleY) || (snakeBody[0].x - 20 === appleX) && (snakeBody[0].y === appleY) || (snakeBody[0].y + 20 === appleY) && (snakeBody[0].x === appleX) || (snakeBody[0].y - 20 === appleY) && (snakeBody[0].x === appleX)) {
+  if ((snakeBody[0].x + 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].x - 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].y + 20 === appleY && snakeBody[0].x === appleX) || (snakeBody[0].y - 20 === appleY && snakeBody[0].x === appleX)) {
+    console.log('ate')
     eatingApple = true
     newApple()
     growSnake()
