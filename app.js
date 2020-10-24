@@ -44,16 +44,15 @@ window.onload = function () {
     if (isSnakeAboutToEatApple) {
       // if so then grow snake
       // clone current head
-      // const clonedHead = snakeBody.slice(0, 1)
-      const clonedHead = [...snakeBody]
-      // // move the clone in the current direction
-      // ????????
-      // // add clone to the beginning of the snakeBody array
-      // snakeBody[0] = clonedHead[0]
-      snakeBody.unshift(clonedHead[0])
-      // snakeBody.unshift(clonedHead)
+      // const clonedHead = snakeBody.slice(0, 1) // shallow copy
+      // const clonedHead = [...snakeBody] // shallow copy
+      const clonedHead = JSON.parse(JSON.stringify(snakeBody[0])) // deep copy
+      // move the clone in the current direction
+
+      // add clone to the beginning of the snakeBody array
+      snakeBody.unshift(clonedHead)
       playerScore++
-      // debugger
+      debugger
       newApple()
     } else {
       moveSnake()
