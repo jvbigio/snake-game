@@ -19,12 +19,12 @@ const snakeBody = [
 let appleX = 0
 let appleY = 0
 let eatingApple
-// newApple()
+newApple()
 
 const score = document.querySelector('.points')
 let playerScore = 0
 
-const DEBUG = true
+const DEBUG = false
 
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
