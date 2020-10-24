@@ -6,10 +6,10 @@ const moveX = 20
 const moveY = 20
 let direction
 
-// added two body parts for testing
+// added two parts to work on snake collides with self
 const snakeBody = [
-  { x: 100, y: 80 },
-  { x: 80, y: 80 },
+  // { x: 100, y: 80 },
+  // { x: 80, y: 80 },
   { x: 60, y: 80 },
   { x: 40, y: 80 },
   { x: 20, y: 80 },
@@ -18,8 +18,8 @@ const snakeBody = [
 
 let appleX = 0
 let appleY = 0
-let eatingApple = false
-newApple()
+let eatingApple
+// newApple()
 
 const score = document.querySelector('.points')
 let playerScore = 0
@@ -32,8 +32,8 @@ window.onload = function () {
   let gameInterval = 100
 
   if (DEBUG) {
-    appleX = 160
-    // appleX = 120
+    appleX = 120
+    // appleX = 160
     appleY = 80
 
     gameInterval = 1000
@@ -42,10 +42,28 @@ window.onload = function () {
   setInterval(() => {
     drawCanvas()
     drawApple()
-    moveSnake()
+    eatingApple = false
+    const isSnakeAboutToEatApple = ateApple()
+    if (isSnakeAboutToEatApple) {
+      const clonedHead = JSON.parse(JSON.stringify(snakeBody[0]))
+      if (direction === 'ArrowRight') {
+        clonedHead.x += moveX
+      } else if (direction === 'ArrowDown') {
+        clonedHead.y += moveY
+      } else if (direction === 'ArrowLeft') {
+        clonedHead.x -= moveX
+      } else if (direction === 'ArrowUp') {
+        clonedHead.y -= moveY
+      }
+      snakeBody.unshift(clonedHead)
+      playerScore++
+      newApple()
+    } else {
+      moveSnake()
+    }
     drawSnake()
+    // snakeCollision()
     wallCollision()
-    ateApple()
     updateScore()
   }, gameInterval)
 }
@@ -89,22 +107,6 @@ function moveSnake () {
   }
 }
 
-function growSnake () {
-  canvasContext.fillStyle = '#303030'
-  snakeBody.unshift(snakeBody[0])
-  canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
-  canvasContext.fillStyle = 'blue'
-  for (let i = 1; i < snakeBody.length; i++) {
-    const element = snakeBody[i]
-
-    // skip an iteration???
-    if (element === 1) {
-      continue
-    }
-    canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
-  }
-}
-
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
@@ -112,12 +114,10 @@ function drawApple () {
 }
 
 function ateApple () {
-  if (snakeBody[0].x === appleX && snakeBody[0].y === appleY) {
+  if ((appleX - 20 === snakeBody[0].x && snakeBody[0].y === appleY) || (appleX + 20 === snakeBody[0].x && snakeBody[0].y === appleY) || (appleY + 20 === snakeBody[0].y && snakeBody[0].x === appleX) || (appleY - 20 === snakeBody[0].y && snakeBody[0].x === appleX)) {
     eatingApple = true
-    newApple()
-    growSnake()
-    playerScore++
   }
+  return eatingApple
 }
 
 function newApple () {
