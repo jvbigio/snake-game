@@ -44,12 +44,13 @@ window.onload = function () {
     drawApple()
     // check to see if snake is about to eat apple
     eatingApple = false
+    ateApple()
     if (eatingApple) {
-      console.log(eatingApple)
+      // console.log(eatingApple) // true
       // if so then grow apple
       // clone current head
       const clonedHead = snakeBody.unshift(snakeBody[0])
-      console.log(clonedHead)
+      // console.log(clonedHead) // 5
       // move the clone in the current direction
 
       // add clone to the beginning of the snakeBody array
@@ -62,7 +63,6 @@ window.onload = function () {
     }
     drawSnake()
     wallCollision()
-    ateApple()
     updateScore()
   }, gameInterval)
 }
@@ -108,21 +108,21 @@ function moveSnake () {
   }
 }
 
-function growSnake () {
-  // canvasContext.fillStyle = '#303030'
-  // snakeBody.unshift(snakeBody[0])
-  // canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
-  // canvasContext.fillStyle = 'blue'
-  // for (let i = 1; i < snakeBody.length; i++) {
-  //   const element = snakeBody[i]
+// function growSnake () {
+//   // canvasContext.fillStyle = '#303030'
+//   // snakeBody.unshift(snakeBody[0])
+//   // canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
+//   // canvasContext.fillStyle = 'blue'
+//   // for (let i = 1; i < snakeBody.length; i++) {
+//   //   const element = snakeBody[i]
 
-  //   // skip an iteration???
-  //   if (element === 1) {
-  //     continue
-  //   }
-  //   canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
-  // }
-}
+//   //   // skip an iteration???
+//   //   if (element === 1) {
+//   //     continue
+//   //   }
+//   //   canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
+//   // }
+// }
 
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
@@ -136,8 +136,9 @@ function ateApple () {
   if ((snakeBody[0].x + 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].x - 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].y + 20 === appleY && snakeBody[0].x === appleX) || (snakeBody[0].y - 20 === appleY && snakeBody[0].x === appleX)) {
     console.log('ate')
     eatingApple = true
+    console.log(eatingApple)
     newApple()
-    growSnake()
+    // growSnake()
     playerScore++
   }
 }
