@@ -131,8 +131,6 @@ function drawApple () {
 }
 
 function ateApple () {
-  // if (snakeBody[0].x === appleX && snakeBody[0].y === appleY) {
-  // if ((snakeBody[0].x + 20 === appleX) && (snakeBody[0].y === appleY) || (snakeBody[0].x - 20 === appleX) && (snakeBody[0].y === appleY) || (snakeBody[0].y + 20 === appleY) && (snakeBody[0].x === appleX) || (snakeBody[0].y - 20 === appleY) && (snakeBody[0].x === appleX)) {
   if ((snakeBody[0].x + 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].x - 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].y + 20 === appleY && snakeBody[0].x === appleX) || (snakeBody[0].y - 20 === appleY && snakeBody[0].x === appleX)) {
     console.log('ate')
     eatingApple = true
