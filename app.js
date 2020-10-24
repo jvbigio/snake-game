@@ -6,10 +6,7 @@ const moveX = 20
 const moveY = 20
 let direction
 
-// added two body parts for testing
 const snakeBody = [
-  // { x: 100, y: 80 },
-  // { x: 80, y: 80 },
   { x: 60, y: 80 },
   { x: 40, y: 80 },
   { x: 20, y: 80 },
@@ -32,7 +29,6 @@ window.onload = function () {
   let gameInterval = 100
 
   if (DEBUG) {
-    // appleX = 160
     appleX = 120
     appleY = 80
 
@@ -44,20 +40,25 @@ window.onload = function () {
     drawApple()
     // check to see if snake is about to eat apple
     eatingApple = false
-    ateApple()
-    if (eatingApple) {
+    // console.log(eatingApple) // false
+    const isSnakeAboutToEatApple = ateApple()
+    // ateApple()
+    console.log(isSnakeAboutToEatApple)
+    if (isSnakeAboutToEatApple) {
+      // debugger
       // console.log(eatingApple) // true
-      // if so then grow apple
+      // if so then grow snake
       // clone current head
-      const clonedHead = snakeBody.unshift(snakeBody[0])
-      // console.log(clonedHead) // 5
+      const clonedHead = snakeBody.slice(0)
+      console.log(clonedHead[0])
       // move the clone in the current direction
-
+      clonedHead[0].x += moveX
       // add clone to the beginning of the snakeBody array
-
+      snakeBody.unshift(clonedHead[0])
       // add score
-
+      playerScore++
       // move apple position
+      newApple()
     } else {
       moveSnake() // see todo notes
     }
@@ -108,22 +109,6 @@ function moveSnake () {
   }
 }
 
-// function growSnake () {
-//   // canvasContext.fillStyle = '#303030'
-//   // snakeBody.unshift(snakeBody[0])
-//   // canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
-//   // canvasContext.fillStyle = 'blue'
-//   // for (let i = 1; i < snakeBody.length; i++) {
-//   //   const element = snakeBody[i]
-
-//   //   // skip an iteration???
-//   //   if (element === 1) {
-//   //     continue
-//   //   }
-//   //   canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
-//   // }
-// }
-
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
   canvasContext.fillRect(appleX, appleY, 20, 20)
@@ -132,13 +117,9 @@ function drawApple () {
 
 function ateApple () {
   if ((snakeBody[0].x + 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].x - 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].y + 20 === appleY && snakeBody[0].x === appleX) || (snakeBody[0].y - 20 === appleY && snakeBody[0].x === appleX)) {
-    console.log('ate')
     eatingApple = true
-    console.log(eatingApple)
-    newApple()
-    // growSnake()
-    playerScore++
   }
+  return eatingApple
 }
 
 function newApple () {
@@ -183,3 +164,20 @@ function gameOver () {
   })
   playerScore = 0
 }
+
+/// /////// testing:
+
+// const snakeBody = [
+//   { x: 60, y: 80 },
+//   { x: 40, y: 80 },
+//   { x: 20, y: 80 },
+//   { x: 0, y: 80 }
+// ]
+
+// // const clone = snakeBody.slice(snakeBody[0].x, snakeBody[0].y) // no
+// // const clone = snakeBody.slice(snakeBody[0]) // works
+// // console.log(clone[0]) // works
+// const clone = snakeBody.slice(0) // works
+// console.log(clone[0]) // works
+// snakeBody.unshift(clone[0])
+// console.log(snakeBody)
