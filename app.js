@@ -16,7 +16,7 @@ const snakeBody = [
 let appleX = 0
 let appleY = 0
 let eatingApple
-newApple()
+// newApple()
 
 const score = document.querySelector('.points')
 let playerScore = 0
@@ -40,23 +40,18 @@ window.onload = function () {
     drawApple()
     // check to see if snake is about to eat apple
     eatingApple = false
-    // console.log(eatingApple) // false
     const isSnakeAboutToEatApple = ateApple()
-    // ateApple()
-    console.log(isSnakeAboutToEatApple)
     if (isSnakeAboutToEatApple) {
-      // debugger
-      // console.log(eatingApple) // true
       // if so then grow snake
       // clone current head
-      const clonedHead = snakeBody.slice(0)
-      console.log(clonedHead[0])
+      const clonedHead = snakeBody.slice(0, 1)
       // move the clone in the current direction
       clonedHead[0].x += moveX
       // add clone to the beginning of the snakeBody array
       snakeBody.unshift(clonedHead[0])
       // add score
       playerScore++
+      debugger
       // move apple position
       newApple()
     } else {
@@ -68,7 +63,7 @@ window.onload = function () {
   }, gameInterval)
 }
 
-// TODO: you don't always want to move the snake. say snake is 2 length, just when its about to hit apple, we want to check if snake is about to eat apple, stop moving snake, add new head piece where apple is (left, right, up, down). otherwise, go ahead and keep moving
+// TODO: ANDY hints: you don't always want to move the snake. say snake is 2 length, just when its about to hit apple, we want to check if snake is about to eat apple, stop moving snake, add new head piece where apple is (left, right, up, down). otherwise, keep moving
 
 window.addEventListener('keydown', e => {
   const keyPress = e.key
