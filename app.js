@@ -44,26 +44,25 @@ window.onload = function () {
     if (isSnakeAboutToEatApple) {
       // if so then grow snake
       // clone current head
-      const clonedHead = snakeBody.slice(0, 1)
-      // move the clone in the current direction
-      clonedHead[0].x += moveX
-      // add clone to the beginning of the snakeBody array
+      // const clonedHead = snakeBody.slice(0, 1)
+      const clonedHead = [...snakeBody]
+      // // move the clone in the current direction
+      // ????????
+      // // add clone to the beginning of the snakeBody array
+      // snakeBody[0] = clonedHead[0]
       snakeBody.unshift(clonedHead[0])
-      // add score
+      // snakeBody.unshift(clonedHead)
       playerScore++
-      debugger
-      // move apple position
+      // debugger
       newApple()
     } else {
-      moveSnake() // see todo notes
+      moveSnake()
     }
     drawSnake()
     wallCollision()
     updateScore()
   }, gameInterval)
 }
-
-// TODO: ANDY hints: you don't always want to move the snake. say snake is 2 length, just when its about to hit apple, we want to check if snake is about to eat apple, stop moving snake, add new head piece where apple is (left, right, up, down). otherwise, keep moving
 
 window.addEventListener('keydown', e => {
   const keyPress = e.key
@@ -111,7 +110,8 @@ function drawApple () {
 }
 
 function ateApple () {
-  if ((snakeBody[0].x + 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].x - 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].y + 20 === appleY && snakeBody[0].x === appleX) || (snakeBody[0].y - 20 === appleY && snakeBody[0].x === appleX)) {
+  if ((appleX - 20 === snakeBody[0].x && snakeBody[0].y === appleY) || (appleX + 20 === snakeBody[0].x && snakeBody[0].y === appleY) || (appleY + 20 === snakeBody[0].y && snakeBody[0].x === appleX) || (appleY - 20 === snakeBody[0].y && snakeBody[0].x === appleX)) {
+  // if ((snakeBody[0].x + 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].x - 20 === appleX && snakeBody[0].y === appleY) || (snakeBody[0].y + 20 === appleY && snakeBody[0].x === appleX) || (snakeBody[0].y - 20 === appleY && snakeBody[0].x === appleX)) {
     eatingApple = true
   }
   return eatingApple
@@ -160,7 +160,7 @@ function gameOver () {
   playerScore = 0
 }
 
-/// /////// testing:
+// /// /////// testing:
 
 // const snakeBody = [
 //   { x: 60, y: 80 },
@@ -173,6 +173,10 @@ function gameOver () {
 // // const clone = snakeBody.slice(snakeBody[0]) // works
 // // console.log(clone[0]) // works
 // const clone = snakeBody.slice(0) // works
+// console.log(snakeBody)
 // console.log(clone[0]) // works
+// const cloned = snakeBody.slice(0, 1) // works
+
+// console.log(cloned) // works
 // snakeBody.unshift(clone[0])
 // console.log(snakeBody)
