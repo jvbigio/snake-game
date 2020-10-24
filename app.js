@@ -19,7 +19,7 @@ const snakeBody = [
 let appleX = 0
 let appleY = 0
 let eatingApple
-// newApple()
+newApple()
 
 const score = document.querySelector('.points')
 let playerScore = 0
@@ -114,7 +114,7 @@ function drawApple () {
 }
 
 function ateApple () {
-  if ((appleX - 20 === snakeBody[0].x && snakeBody[0].y === appleY) || (appleX + 20 === snakeBody[0].x && snakeBody[0].y === appleY) || (appleY + 20 === snakeBody[0].y && snakeBody[0].x === appleX) || (appleY - 20 === snakeBody[0].y && snakeBody[0].x === appleX)) {
+  if (snakeBody[0].x === appleX && snakeBody[0].y === appleY) {
     eatingApple = true
   }
   return eatingApple
