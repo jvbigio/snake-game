@@ -6,12 +6,8 @@ const moveX = 20
 const moveY = 20
 let direction
 // TODO: fix movement violations... moving right can't move backwards.
-// TODO: snake collides with itself game over
 
-// added two parts to work on snake collides with self
 const snakeBody = [
-  { x: 100, y: 80 },
-  { x: 80, y: 80 },
   { x: 60, y: 80 },
   { x: 40, y: 80 },
   { x: 20, y: 80 },
