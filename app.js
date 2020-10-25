@@ -6,10 +6,7 @@ const moveX = 20
 const moveY = 20
 let direction
 
-// added two parts to work on snake collides with self
 const snakeBody = [
-  // { x: 100, y: 80 },
-  // { x: 80, y: 80 },
   { x: 60, y: 80 },
   { x: 40, y: 80 },
   { x: 20, y: 80 },
