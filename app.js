@@ -5,6 +5,8 @@ const snakeHeight = 20
 const moveX = 20
 const moveY = 20
 let direction
+// let changedDirection = false
+let facing = 'right'
 // TODO: fix movement violations... moving right can't move backwards.
 
 const snakeBody = [
@@ -30,8 +32,9 @@ window.onload = function () {
   let gameInterval = 100
 
   if (DEBUG) {
-    // appleX = 120
-    appleX = 160
+    appleX = 120
+    // appleX = 60
+    // appleX = 160
     appleY = 80
 
     gameInterval = 1000
@@ -87,21 +90,41 @@ function drawSnake () {
 }
 
 function moveSnake () {
+  // console.log(key)
+  console.log(direction)
   if (!direction) { return }
 
   for (let i = snakeBody.length - 1; i > 0; i--) {
     snakeBody[i].x = snakeBody[i - 1].x
     snakeBody[i].y = snakeBody[i - 1].y
   }
+  // original..refactoring below for movement violations
+  // if (direction === 'ArrowUp') {
+  //   snakeBody[0].y -= moveY
+  // } else if (direction === 'ArrowRight') {
+  //   snakeBody[0].x += moveX
+  // } else if (direction === 'ArrowDown') {
+  //   snakeBody[0].y += moveY
+  // } else if (direction === 'ArrowLeft') {
+  //   snakeBody[0].x -= moveX
+  // }
 
-  if (direction === 'ArrowUp') {
+  // TEST
+
+  if (direction === 'ArrowUp' && facing !== 'down') {
+    facing = 'up'
     snakeBody[0].y -= moveY
-  } else if (direction === 'ArrowRight') {
+  } else if (direction === 'ArrowRight' && facing !== 'left') {
+    facing = 'right'
     snakeBody[0].x += moveX
-  } else if (direction === 'ArrowDown') {
+  } else if (direction === 'ArrowDown' && facing !== 'up') {
+    facing = 'down'
     snakeBody[0].y += moveY
-  } else if (direction === 'ArrowLeft') {
+  } else if (direction === 'ArrowLeft' && facing !== 'right') {
+    facing = 'left'
     snakeBody[0].x -= moveX
+  } else {
+    return false
   }
 }
 
@@ -124,6 +147,12 @@ function newApple () {
   const randomY = Math.random() * (580 + 20)
   appleY = randomY - (randomY % 20)
   // check if apple x, apple y is on top of snake:
+  // if (!eatingApple) {
+  // snakeBody.forEach(snake => {
+  //   if (!eatingApple && snake === appleX && appleY) {
+  //     return newApple()
+  //   }
+  // })
 }
 
 function snakeCollision () {
