@@ -5,11 +5,13 @@ const snakeHeight = 20
 const moveX = 20
 const moveY = 20
 let direction
+// TODO: fix movement violations... moving right can't move backwards.
+// TODO: snake collides with itself game over
 
 // added two parts to work on snake collides with self
 const snakeBody = [
-  // { x: 100, y: 80 },
-  // { x: 80, y: 80 },
+  { x: 100, y: 80 },
+  { x: 80, y: 80 },
   { x: 60, y: 80 },
   { x: 40, y: 80 },
   { x: 20, y: 80 },
@@ -32,8 +34,8 @@ window.onload = function () {
   let gameInterval = 100
 
   if (DEBUG) {
-    appleX = 120
-    // appleX = 160
+    // appleX = 120
+    appleX = 160
     appleY = 80
 
     gameInterval = 1000
@@ -62,7 +64,7 @@ window.onload = function () {
       moveSnake()
     }
     drawSnake()
-    // snakeCollision()
+    snakeCollision()
     wallCollision()
     updateScore()
   }, gameInterval)
@@ -126,6 +128,14 @@ function newApple () {
   const randomY = Math.random() * (580 + 20)
   appleY = randomY - (randomY % 20)
   // check if apple x, apple y is on top of snake:
+}
+
+function snakeCollision () {
+  for (let i = 1; i < snakeBody.length; i++) {
+    if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
+      gameOver()
+    }
+  }
 }
 
 function wallCollision () {
