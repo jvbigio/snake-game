@@ -1,3 +1,5 @@
+// import { sound } from './../data/sound.js'
+import { sound } from './data/sound.js'
 
 let canvas
 let canvasContext
@@ -159,12 +161,14 @@ function snakeCollision () {
   for (let i = 1; i < snakeBody.length; i++) {
     if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
       gameOver()
+      sound.impact.play()
     }
   }
 }
 
 function wallCollision () {
   if (snakeBody[0].y < 0 || snakeBody[0].y === canvas.height || snakeBody[0].x === canvas.width || snakeBody[0].x < 0) {
+    // sound.impact.play()
     gameOver()
   }
 }
@@ -184,6 +188,15 @@ function gameOver () {
   popupModal.classList.add('is--visible')
   bodyBlackout.classList.add('is-blacked-out')
 
+  setTimeout(function () {
+    sound.impact.play()
+
+    setTimeout(function () {
+      sound.impact.pause()
+      sound.currentTime = 0
+    }, 2000)
+  }, 100)
+
   popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
@@ -196,4 +209,6 @@ function gameOver () {
     window.location.reload()
   })
   playerScore = 0
+  // direction = ''
+  // sound.impact.pause()
 }
