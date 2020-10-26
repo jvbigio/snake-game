@@ -1,5 +1,5 @@
 // import { sound } from './../data/sound.js'
-import { sound } from './data/sound.js'
+// import { sound } from './data/sound.js'
 
 let canvas
 let canvasContext
@@ -93,7 +93,7 @@ function drawSnake () {
 
 function moveSnake () {
   // console.log(key)
-  console.log(direction)
+  // console.log(direction)
   if (!direction) { return }
 
   for (let i = snakeBody.length - 1; i > 0; i--) {
@@ -101,33 +101,36 @@ function moveSnake () {
     snakeBody[i].y = snakeBody[i - 1].y
   }
   // original..refactoring below for movement violations
-  // if (direction === 'ArrowUp') {
-  //   snakeBody[0].y -= moveY
-  // } else if (direction === 'ArrowRight') {
-  //   snakeBody[0].x += moveX
-  // } else if (direction === 'ArrowDown') {
-  //   snakeBody[0].y += moveY
-  // } else if (direction === 'ArrowLeft') {
-  //   snakeBody[0].x -= moveX
-  // }
+  if (direction === 'ArrowUp') {
+    snakeBody[0].y -= moveY
+  } else if (direction === 'ArrowRight') {
+    snakeBody[0].x += moveX
+  } else if (direction === 'ArrowDown') {
+    snakeBody[0].y += moveY
+  } else if (direction === 'ArrowLeft') {
+    snakeBody[0].x -= moveX
+  }
 
   // TEST
 
-  if (direction === 'ArrowUp' && facing !== 'down') {
-    facing = 'up'
-    snakeBody[0].y -= moveY
-  } else if (direction === 'ArrowRight' && facing !== 'left') {
-    facing = 'right'
-    snakeBody[0].x += moveX
-  } else if (direction === 'ArrowDown' && facing !== 'up') {
-    facing = 'down'
-    snakeBody[0].y += moveY
-  } else if (direction === 'ArrowLeft' && facing !== 'right') {
-    facing = 'left'
-    snakeBody[0].x -= moveX
-  } else {
-    return false
-  }
+  // if (direction === 'ArrowUp' && facing !== 'down') {
+  //   facing = 'up'
+  //   snakeBody[0].y -= moveY
+  // } else if (direction === 'ArrowRight' && facing !== 'left') {
+  //   facing = 'right'
+  //   snakeBody[0].x += moveX
+  // } else if (direction === 'ArrowDown' && facing !== 'up') {
+  //   facing = 'down'
+  //   snakeBody[0].y += moveY
+  // } else if (direction === 'ArrowLeft' && facing !== 'right') {
+  //   snakeBody[0].x -= moveX
+  //   facing = 'left'
+  // } else if (direction === 'ArrowLeft' && facing === 'right') {
+  //   // snakeBody[0].x += moveX
+  //   return false
+  // } else {
+  //   return false
+  // }
 }
 
 function drawApple () {
@@ -188,14 +191,14 @@ function gameOver () {
   popupModal.classList.add('is--visible')
   bodyBlackout.classList.add('is-blacked-out')
 
-  setTimeout(function () {
-    sound.impact.play()
+  // setTimeout(function () {
+  //   sound.impact.play()
 
-    setTimeout(function () {
-      sound.impact.pause()
-      sound.currentTime = 0
-    }, 2000)
-  }, 100)
+  //   setTimeout(function () {
+  //     sound.impact.pause()
+  //     sound.currentTime = 0
+  //   }, 2000)
+  // }, 100)
 
   popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
