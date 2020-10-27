@@ -135,9 +135,6 @@ function moveSnake () {
   // } else if (direction === 'ArrowLeft' && facing !== 'right') {
   //   snakeBody[0].x -= moveX
   //   facing = 'left'
-  // } else if (direction === 'ArrowLeft' && facing === 'right') {
-  //   // snakeBody[0].x += moveX
-  //   return false
   // } else {
   //   return false
   // }
@@ -173,7 +170,7 @@ function newApple () {
 function snakeCollision () {
   for (let i = 1; i < snakeBody.length; i++) {
     if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
-      gameOver()
+      // gameOver()
     }
   }
 }
