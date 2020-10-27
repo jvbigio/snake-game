@@ -1,4 +1,3 @@
-
 let canvas
 let canvasContext
 const snakeHeight = 20
@@ -6,7 +5,9 @@ const moveX = 20
 const moveY = 20
 let direction
 
-const snakeBody = [
+// TODO: fix movement violations... moving right can't move backwards.
+
+let snakeBody = [
   { x: 60, y: 80 },
   { x: 40, y: 80 },
   { x: 20, y: 80 },
@@ -30,7 +31,6 @@ window.onload = function () {
 
   if (DEBUG) {
     appleX = 120
-    // appleX = 160
     appleY = 80
 
     gameInterval = 1000
@@ -59,7 +59,7 @@ window.onload = function () {
       moveSnake()
     }
     drawSnake()
-    // snakeCollision()
+    snakeCollision()
     wallCollision()
     updateScore()
   }, gameInterval)
@@ -92,7 +92,6 @@ function moveSnake () {
     snakeBody[i].x = snakeBody[i - 1].x
     snakeBody[i].y = snakeBody[i - 1].y
   }
-
   if (direction === 'ArrowUp') {
     snakeBody[0].y -= moveY
   } else if (direction === 'ArrowRight') {
@@ -123,6 +122,20 @@ function newApple () {
   const randomY = Math.random() * (580 + 20)
   appleY = randomY - (randomY % 20)
   // check if apple x, apple y is on top of snake:
+  // if (!eatingApple) {
+  // snakeBody.forEach(snake => {
+  //   if (!eatingApple && snake === appleX && appleY) {
+  //     return newApple()
+  //   }
+  // })
+}
+
+function snakeCollision () {
+  for (let i = 1; i < snakeBody.length; i++) {
+    if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
+      gameOver()
+    }
+  }
 }
 
 function wallCollision () {
@@ -149,13 +162,21 @@ function gameOver () {
   popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
-    window.location.reload()
+    // window.location.reload() // instead of reload, try resetting snake
   })
 
   bodyBlackout.addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
-    window.location.reload()
+    // window.location.reload()
   })
   playerScore = 0
+  snakeBody = [
+    { x: 60, y: 80 },
+    { x: 40, y: 80 },
+    { x: 20, y: 80 },
+    { x: 0, y: 80 }
+  ]
+  direction = ''
+  // sound.impact.pause()
 }
