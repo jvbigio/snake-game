@@ -1,6 +1,3 @@
-// import { sound } from './../data/sound.js'
-// import { sound } from './data/sound.js'
-
 let canvas
 let canvasContext
 const snakeHeight = 20
@@ -117,17 +114,6 @@ function moveSnake () {
     snakeBody[i].y = snakeBody[i - 1].y
   }
   // original..refactoring below for movement violations
-  // if (direction === 'ArrowUp') {
-  //   snakeBody[0].y -= moveY
-  // } else if (direction === 'ArrowRight') {
-  //   snakeBody[0].x += moveX
-  // } else if (direction === 'ArrowDown') {
-  //   snakeBody[0].y += moveY
-  // } else if (direction === 'ArrowLeft') {
-  //   snakeBody[0].x -= moveX
-  // }
-
-  // TEST
   if (direction === 'ArrowUp') {
     snakeBody[0].y -= moveY
   } else if (direction === 'ArrowRight') {
@@ -190,14 +176,12 @@ function snakeCollision () {
   for (let i = 1; i < snakeBody.length; i++) {
     if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
       gameOver()
-      // sound.impact.play()
     }
   }
 }
 
 function wallCollision () {
   if (snakeBody[0].y < 0 || snakeBody[0].y === canvas.height || snakeBody[0].x === canvas.width || snakeBody[0].x < 0) {
-    // sound.impact.play()
     gameOver()
   }
 }
@@ -216,15 +200,6 @@ const popupModal = document.querySelector('.popup-modal')
 function gameOver () {
   popupModal.classList.add('is--visible')
   bodyBlackout.classList.add('is-blacked-out')
-
-  // setTimeout(function () {
-  //   sound.impact.play()
-
-  //   setTimeout(function () {
-  //     sound.impact.pause()
-  //     sound.currentTime = 0
-  //   }, 2000)
-  // }, 100)
 
   popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
@@ -245,5 +220,4 @@ function gameOver () {
     { x: 0, y: 80 }
   ]
   direction = ''
-  // sound.impact.pause()
 }
