@@ -79,7 +79,6 @@ window.addEventListener('keydown', e => {
   const keyPress = e.key
   if (!hasKeyBeenPressed) {
     hasKeyBeenPressed = true
-    console.log(hasKeyBeenPressed)
     direction = keyPress
   }
 })
@@ -88,7 +87,6 @@ window.addEventListener('keydown', e => {
 window.addEventListener('keyup', () => {
   console.log('keyed up')
   hasKeyBeenPressed = false
-  console.log(hasKeyBeenPressed)
 })
 
 function drawCanvas () {
