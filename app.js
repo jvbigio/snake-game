@@ -4,6 +4,8 @@ const snakeHeight = 20
 const moveX = 20
 const moveY = 20
 let direction
+const sound = document.querySelector('.squish-sound')
+const soundFlag = true
 
 let snakeBody = [
   { x: 60, y: 80 },
@@ -142,7 +144,7 @@ function newApple () {
 function snakeCollision () {
   for (let i = 1; i < snakeBody.length; i++) {
     if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
-      // gameOver()
+      gameOver()
     }
   }
 }

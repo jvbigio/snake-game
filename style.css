@@ -16,6 +16,7 @@ body {
 }
 
 header {
+  /* background: url(/images/forest.jpg); */
   background-color: var(--black-smoke-color);
   color: var(--main-bg-color);
   box-shadow: 2px 2px 5px;
@@ -31,6 +32,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 80%;
 }
 
 .score-box {
@@ -129,7 +131,7 @@ header {
   pointer-events: auto;
 }
 
-i {
+.click-close {
    position: absolute;
    font-size: 1.2rem;
    top: -10px;
