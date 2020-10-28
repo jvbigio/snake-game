@@ -1,5 +1,6 @@
 :root {
   --main-bg-color: #f2f3f4;
+  --apple-red: #b11b1b;
 }
 
 * {
@@ -41,7 +42,7 @@ header {
 }
 
 .points {
-  color: #b11b1b;
+  color: var(--apple-red);
   font-weight: bold;
   animation-name: blink;
   animation-duration: 1s;
@@ -54,7 +55,7 @@ header {
   }
 
   50% {
-    color: #b11b1b;
+    color: var(--apple-red);
   }
 
   100% {
@@ -70,7 +71,7 @@ header {
 }
 
 .apple-icon {
-  color: #b11b1b;
+  color: var(--apple-red);
 }
 
 .trophy {

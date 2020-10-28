@@ -25,7 +25,7 @@ window.onload = function () {
   canvasContext = canvas.getContext('2d')
   let gameInterval = 100
 
-  const DEBUG = true
+  const DEBUG = false
 
   if (DEBUG) {
     appleX = 120
@@ -64,7 +64,7 @@ window.onload = function () {
 }
 
 window.addEventListener('keydown', e => {
-  e.preventDefault()
+  // e.preventDefault()
   const keyPress = e.key
 
   if (keyPress === 'ArrowDown' && direction !== 'ArrowUp') {
@@ -129,19 +129,20 @@ function newApple () {
   appleX = randomX - (randomX % 20)
   const randomY = Math.random() * (580 + 20)
   appleY = randomY - (randomY % 20)
-  // check if apple x, apple y is on top of snake:
-  // if (!eatingApple) {
-  // snakeBody.forEach(snake => {
-  //   if (!eatingApple && snake === appleX && appleY) {
-  //     return newApple()
-  //   }
-  // })
+
+  if (!eatingApple) {
+    snakeBody.forEach(snake => {
+      if (snake.x === appleX && snake.y === appleY) {
+        newApple()
+      }
+    })
+  }
 }
 
 function snakeCollision () {
   for (let i = 1; i < snakeBody.length; i++) {
     if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
-      gameOver()
+      // gameOver()
     }
   }
 }
@@ -170,24 +171,14 @@ function gameOver () {
   popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
-    // window.location.reload() // instead of reload, try resetting snake
     init()
   })
 
   bodyBlackout.addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
-    // window.location.reload()
     init()
   })
-  // snakeBody = [
-  //   { x: 60, y: 80 },
-  //   { x: 40, y: 80 },
-  //   { x: 20, y: 80 },
-  //   { x: 0, y: 80 }
-  // ]
-  // direction = ''
-  // playerScore = ''
 }
 
 function init () {
