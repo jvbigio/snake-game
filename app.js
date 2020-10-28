@@ -4,11 +4,6 @@ const snakeHeight = 20
 const moveX = 20
 const moveY = 20
 let direction
-// let changedDirection = false // test
-// let facing = 'right' // test
-let hasKeyBeenPressed = false
-
-// TODO: fix movement violations... moving right can't move backwards.
 
 let snakeBody = [
   { x: 60, y: 80 },
@@ -25,12 +20,12 @@ newApple()
 const score = document.querySelector('.points')
 let playerScore = 0
 
-const DEBUG = true
-
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   let gameInterval = 100
+
+  const DEBUG = true
 
   if (DEBUG) {
     appleX = 120
@@ -68,25 +63,19 @@ window.onload = function () {
   }, gameInterval)
 }
 
-// original
-// window.addEventListener('keydown', e => {
-//   const keyPress = e.key
-//   direction = keyPress
-// })
-
-// TEST
 window.addEventListener('keydown', e => {
+  e.preventDefault()
   const keyPress = e.key
-  if (!hasKeyBeenPressed) {
-    hasKeyBeenPressed = true
-    direction = keyPress
-  }
-})
 
-// TEST
-window.addEventListener('keyup', () => {
-  console.log('keyed up')
-  hasKeyBeenPressed = false
+  if (keyPress === 'ArrowDown' && direction !== 'ArrowUp') {
+    direction = 'ArrowDown'
+  } else if (keyPress === 'ArrowUp' && direction !== 'ArrowDown') {
+    direction = 'ArrowUp'
+  } else if (keyPress === 'ArrowRight' && direction !== 'ArrowLeft') {
+    direction = 'ArrowRight'
+  } else if (keyPress === 'ArrowLeft' && direction !== 'ArrowRight') {
+    direction = 'ArrowLeft'
+  }
 })
 
 function drawCanvas () {
@@ -111,7 +100,6 @@ function moveSnake () {
     snakeBody[i].x = snakeBody[i - 1].x
     snakeBody[i].y = snakeBody[i - 1].y
   }
-  // original..refactoring below for movement violations
   if (direction === 'ArrowUp') {
     snakeBody[0].y -= moveY
   } else if (direction === 'ArrowRight') {
@@ -121,23 +109,6 @@ function moveSnake () {
   } else if (direction === 'ArrowLeft') {
     snakeBody[0].x -= moveX
   }
-
-  // TEST
-  // if (direction === 'ArrowUp' && facing !== 'down') {
-  //   facing = 'up'
-  //   snakeBody[0].y -= moveY
-  // } else if (direction === 'ArrowRight' && facing !== 'left') {
-  //   facing = 'right'
-  //   snakeBody[0].x += moveX
-  // } else if (direction === 'ArrowDown' && facing !== 'up') {
-  //   facing = 'down'
-  //   snakeBody[0].y += moveY
-  // } else if (direction === 'ArrowLeft' && facing !== 'right') {
-  //   snakeBody[0].x -= moveX
-  //   facing = 'left'
-  // } else {
-  //   return false
-  // }
 }
 
 function drawApple () {
@@ -170,7 +141,7 @@ function newApple () {
 function snakeCollision () {
   for (let i = 1; i < snakeBody.length; i++) {
     if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
-      // gameOver()
+      gameOver()
     }
   }
 }
@@ -200,14 +171,28 @@ function gameOver () {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
     // window.location.reload() // instead of reload, try resetting snake
+    init()
   })
 
   bodyBlackout.addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
     // window.location.reload()
+    init()
   })
-  playerScore = 0
+  // snakeBody = [
+  //   { x: 60, y: 80 },
+  //   { x: 40, y: 80 },
+  //   { x: 20, y: 80 },
+  //   { x: 0, y: 80 }
+  // ]
+  // direction = ''
+  // playerScore = ''
+}
+
+function init () {
+  score.textContent = 0
+  newApple()
   snakeBody = [
     { x: 60, y: 80 },
     { x: 40, y: 80 },
