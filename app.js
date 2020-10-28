@@ -5,8 +5,6 @@ const moveX = 20
 const moveY = 20
 let direction
 
-// TODO: fix movement violations... moving right can't move backwards.
-
 let snakeBody = [
   { x: 60, y: 80 },
   { x: 40, y: 80 },
@@ -22,12 +20,12 @@ newApple()
 const score = document.querySelector('.points')
 let playerScore = 0
 
-const DEBUG = true
-
 window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   let gameInterval = 100
+
+  const DEBUG = true
 
   if (DEBUG) {
     appleX = 120
@@ -66,8 +64,18 @@ window.onload = function () {
 }
 
 window.addEventListener('keydown', e => {
+  e.preventDefault()
   const keyPress = e.key
-  direction = keyPress
+
+  if (keyPress === 'ArrowDown' && direction !== 'ArrowUp') {
+    direction = 'ArrowDown'
+  } else if (keyPress === 'ArrowUp' && direction !== 'ArrowDown') {
+    direction = 'ArrowUp'
+  } else if (keyPress === 'ArrowRight' && direction !== 'ArrowLeft') {
+    direction = 'ArrowRight'
+  } else if (keyPress === 'ArrowLeft' && direction !== 'ArrowRight') {
+    direction = 'ArrowLeft'
+  }
 })
 
 function drawCanvas () {
@@ -162,15 +170,19 @@ function gameOver () {
   popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
-    // window.location.reload() // instead of reload, try resetting snake
+    init()
   })
 
   bodyBlackout.addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
-    // window.location.reload()
+    init()
   })
-  playerScore = 0
+}
+
+function init () {
+  score.textContent = 0
+  newApple()
   snakeBody = [
     { x: 60, y: 80 },
     { x: 40, y: 80 },
@@ -178,5 +190,4 @@ function gameOver () {
     { x: 0, y: 80 }
   ]
   direction = ''
-  // sound.impact.pause()
 }
