@@ -64,7 +64,6 @@ window.onload = function () {
 }
 
 window.addEventListener('keydown', e => {
-  // e.preventDefault()
   const keyPress = e.key
 
   if (keyPress === 'ArrowDown' && direction !== 'ArrowUp') {
@@ -142,7 +141,7 @@ function newApple () {
 function snakeCollision () {
   for (let i = 1; i < snakeBody.length; i++) {
     if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
-      // gameOver()
+      gameOver()
     }
   }
 }
