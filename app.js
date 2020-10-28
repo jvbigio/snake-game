@@ -163,6 +163,8 @@ function updateScore () {
 // MODAL //
 const bodyBlackout = document.querySelector('.body-blackout')
 const popupModal = document.querySelector('.popup-modal')
+const snakeImage = document.querySelector('.snake-modal')
+const imageContainer = document.querySelector('.image-container')
 
 function gameOver () {
   popupModal.classList.add('is--visible')
@@ -175,6 +177,12 @@ function gameOver () {
   })
 
   bodyBlackout.addEventListener('click', () => {
+    popupModal.classList.remove('is--visible')
+    bodyBlackout.classList.remove('is-blacked-out')
+    init()
+  })
+
+  imageContainer.addEventListener('click', () => {
     popupModal.classList.remove('is--visible')
     bodyBlackout.classList.remove('is-blacked-out')
     init()

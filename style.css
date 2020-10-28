@@ -1,6 +1,7 @@
 :root {
   --main-bg-color: #f2f3f4;
   --apple-red: #b11b1b;
+  --black-smoke-color: #303030;
 }
 
 * {
@@ -15,7 +16,7 @@ body {
 }
 
 header {
-  background-color: #303030;
+  background-color: var(--black-smoke-color);
   color: var(--main-bg-color);
   box-shadow: 2px 2px 5px;
   display: flex;
@@ -64,7 +65,7 @@ header {
 }
 
 .canvas-container {
-  border: 3px solid black;
+  border: 3px solid var(--black-smoke-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,12 +99,31 @@ header {
   display: block;
 }
 
+ .snake-modal {
+   width: 300px;
+   border-radius: 25%;
+ }
+
 .popup-modal {
   height: 365px;
   text-align: center;
-  background: url('https://i.postimg.cc/2Sn1gNt1/snake-img.jpg');
+  /* background: url('https://i.postimg.cc/2Sn1gNt1/snake-img.jpg'); */
+  /* background: url('https://i.postimg.cc/8zDKLBNm/snake-img.png'); */
+  /* background: url('/images/snake.png'); */
+  /* background: url('https://i.postimg.cc/Qxs4LkwK/snake.png'); */
+  
+  
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+  rgba(0, 0, 0, 0.5)),
+  url('https://i.postimg.cc/mg3TLwgx/snake-modal.gif'); */
+  
+  /* background: url('/images/snake-modal.gif'); */
+  /* background: url('https://i.postimg.cc/mg3TLwgx/snake-modal.gif'); */
   width: 650px;
+  /* color: var(--apple-red); */
+  color: var(--black-smoke-color);
   color: #f2f3f4;
+  font-weight: bold;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -114,6 +134,7 @@ header {
   transition: all 300ms ease-in-out;
   z-index: 1011;
   border-radius: 25%;
+  cursor: pointer;
 }
 
 .is--visible {
@@ -121,10 +142,9 @@ header {
   pointer-events: auto;
 }
 
-__close {
-  position: absolute;
-  font-size: 1.2rem;
-  right: -10px;
-  top: -10px;
-  cursor: pointer;
+i {
+   position: absolute;
+   font-size: 1.2rem;
+   top: -10px;
+   cursor: pointer;
 }

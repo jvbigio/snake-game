@@ -26,13 +26,16 @@
       <h3>Game ends if snake collides with itself or the wall</h3>
     </div>
   </div>
-  <div class="body-blackout"></div>
+  <div class="body-blackout">
+  </div>
   <div class="popup-modal shadow">
   <i class="fas fa-2x fa-times text-white bg-primary p-3 popup-modal__close"></i>
-  <h1 class="font-weight-bold">
-    Game Over
-  </h1>
-</div>
+    <div class="image-container">
+      <img src="/images/snake-modal.png" alt="image of snake" class="snake-modal">
+    </div>
+    <h1 class="font-weight-bold">Game Over!</h1>
+    <h3>Click on 'X' or anywhere on image to restart the game</h3>
+  </div>
   <script src="app.js" type="module"></script>
 </body>
 
