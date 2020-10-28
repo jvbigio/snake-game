@@ -107,20 +107,7 @@ header {
 .popup-modal {
   height: 365px;
   text-align: center;
-  /* background: url('https://i.postimg.cc/2Sn1gNt1/snake-img.jpg'); */
-  /* background: url('https://i.postimg.cc/8zDKLBNm/snake-img.png'); */
-  /* background: url('/images/snake.png'); */
-  /* background: url('https://i.postimg.cc/Qxs4LkwK/snake.png'); */
-  
-  
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5),
-  rgba(0, 0, 0, 0.5)),
-  url('https://i.postimg.cc/mg3TLwgx/snake-modal.gif'); */
-  
-  /* background: url('/images/snake-modal.gif'); */
-  /* background: url('https://i.postimg.cc/mg3TLwgx/snake-modal.gif'); */
   width: 650px;
-  /* color: var(--apple-red); */
   color: var(--black-smoke-color);
   color: #f2f3f4;
   font-weight: bold;
