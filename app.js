@@ -4,8 +4,37 @@ const snakeHeight = 20
 const moveX = 20
 const moveY = 20
 let direction
-const sound = document.querySelector('.squish-sound')
-const soundFlag = true
+
+let squishSound
+
+function sound (src) {
+  this.sound = document.createElement('audio')
+  this.sound.src = src
+  this.sound.setAttribute('preload', 'auto')
+  this.sound.setAttribute('controls', 'none')
+  this.sound.style.display = 'none'
+  document.body.appendChild(this.sound)
+  this.play = function () {
+    this.sound.play()
+  }
+  this.stop = function () {
+    this.sound.pause()
+  }
+}
+
+function init () {
+  score.textContent = 0
+  // squishSound = new sound('/sound/squish.mp3')
+  const squishSound = new sound('/sound/squish.mp3')
+  newApple()
+  snakeBody = [
+    { x: 60, y: 80 },
+    { x: 40, y: 80 },
+    { x: 20, y: 80 },
+    { x: 0, y: 80 }
+  ]
+  direction = ''
+}
 
 let snakeBody = [
   { x: 60, y: 80 },
@@ -26,7 +55,7 @@ window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   let gameInterval = 100
-
+  // init() // test
   const DEBUG = false
 
   if (DEBUG) {
@@ -151,6 +180,7 @@ function snakeCollision () {
 
 function wallCollision () {
   if (snakeBody[0].y < 0 || snakeBody[0].y === canvas.height || snakeBody[0].x === canvas.width || snakeBody[0].x < 0) {
+    squishSound('/sound/squish.mp3')
     gameOver()
   }
 }
@@ -165,7 +195,6 @@ function updateScore () {
 // MODAL //
 const bodyBlackout = document.querySelector('.body-blackout')
 const popupModal = document.querySelector('.popup-modal')
-const snakeImage = document.querySelector('.snake-modal')
 const imageContainer = document.querySelector('.image-container')
 
 function gameOver () {
@@ -189,16 +218,4 @@ function gameOver () {
     bodyBlackout.classList.remove('is-blacked-out')
     init()
   })
-}
-
-function init () {
-  score.textContent = 0
-  newApple()
-  snakeBody = [
-    { x: 60, y: 80 },
-    { x: 40, y: 80 },
-    { x: 20, y: 80 },
-    { x: 0, y: 80 }
-  ]
-  direction = ''
 }
