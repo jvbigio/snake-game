@@ -18,6 +18,7 @@ body {
 header {
   /* background: url(/images/forest.jpg); */
   background-color: var(--black-smoke-color);
+  background: url('/images/trees-navbar.png');
   color: var(--main-bg-color);
   box-shadow: 2px 2px 5px;
   display: flex;
@@ -33,6 +34,14 @@ header {
   flex-direction: column;
   align-items: center;
   height: 80%;
+  /* original */
+  /* background: url('https://i.postimg.cc/cH1DfyjK/snake-in-tree.png') no-repeat; */
+  background: url('https://i.postimg.cc/ZRnHsPLj/snake-in-tree.png') no-repeat;
+  /* background-position-x: 85%;
+  background-position-y: 12vh; */
+  background-position-x: 93.5%;
+  background-position-y: 12vh;
+  background-size: 20%;
 }
 
 .score-box {
@@ -43,6 +52,23 @@ header {
   width: 50%;
   font-size: 2rem;
 }
+
+.snake-apple {
+  /* background: var(--main-bg-color);
+  height */
+  /* background: url('/images/snake-apple.jpg') left;
+  height: 20%; */
+}
+
+/* .snake-img {
+  background: url('/images/snake-in-tree.png') no-repeat;
+  background-position: bottom;
+  width: 20%;
+  height: 20%;
+  background: url('https://i.postimg.cc/cH1DfyjK/snake-in-tree.png') no-repeat;
+  background-position-x: 900px;
+  background-position-y: 50vh;
+} */
 
 .points {
   color: var(--apple-red);
