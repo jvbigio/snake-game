@@ -180,6 +180,7 @@ function snakeCollision () {
 }
 
 function wallCollision () {
+
   if (snakeBody[0].y < 0 || snakeBody[0].y === canvas.height || snakeBody[0].x === canvas.width || snakeBody[0].x < 0) {
     gameOver()
   }
@@ -198,6 +199,7 @@ const popupModal = document.querySelector('.popup-modal')
 const imageContainer = document.querySelector('.image-container')
 
 function gameOver () {
+  // mySound.pause()
   popupModal.classList.add('is--visible')
   bodyBlackout.classList.add('is-blacked-out')
 
