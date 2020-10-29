@@ -16,10 +16,16 @@ body {
 }
 
 header {
-  background-color: var(--black-smoke-color);
   background: url('/images/trees-navbar.png');
+  /* one */
+  /* -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000; */
+  /* two */
+  /* -webkit-box-shadow: 5px 5px 15px -3px #000000;
+  box-shadow: 5px 5px 15px -3px #000000; */
   color: var(--main-bg-color);
-  box-shadow: 2px 2px 5px;
+  text-shadow: 3px 5px 2px #474747,
+  2px 2px 2px rgba(206, 89, 55, 0);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,9 +43,19 @@ header {
   background-position-x: 93.5%;
   background-position-y: 12vh;
   background-size: 20%;
+  /* text-shadow: 1px 3px 0 #969696,
+   1px 13px 5px #aba8a8,
+   -27px 34px 2px rgba(206, 89, 55, 0.01); */
 }
 
 .score-box {
+  /* one */
+  /* text-shadow: 1px 3px 0 #969696,
+  1px 13px 5px #aba8a8; */
+  /* two */
+ /* text-shadow: 1px 3px 0 #969696,
+ 1px 13px 5px #aba8a8,
+ -27px 34px 2px rgba(206, 89, 55, 0.01); */
   text-align: center;
   height: 90%;
   margin: 1rem;
@@ -75,6 +91,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000; */
 }
 
 .apple-icon {

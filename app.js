@@ -25,7 +25,7 @@ function sound (src) {
 function init () {
   score.textContent = 0
   // squishSound = new sound('/sound/squish.mp3')
-  const squishSound = new sound('/sound/squish.mp3')
+  // const squishSound = new sound('/sound/squish.mp3')
   newApple()
   snakeBody = [
     { x: 60, y: 80 },
