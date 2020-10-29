@@ -1,6 +1,7 @@
 :root {
   --main-bg-color: #f2f3f4;
   --apple-red: #b11b1b;
+  --black-smoke-color: #303030;
 }
 
 * {
@@ -15,9 +16,16 @@ body {
 }
 
 header {
-  background-color: #303030;
+  background: url('/images/trees-navbar.png');
+  /* one */
+  /* -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000; */
+  /* two */
+  /* -webkit-box-shadow: 5px 5px 15px -3px #000000;
+  box-shadow: 5px 5px 15px -3px #000000; */
   color: var(--main-bg-color);
-  box-shadow: 2px 2px 5px;
+  text-shadow: 3px 5px 2px #474747,
+    2px 2px 2px rgba(206, 89, 55, 0);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,9 +38,24 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 80%;
+  background: url('https://i.postimg.cc/ZRnHsPLj/snake-in-tree.png') no-repeat;
+  background-position-x: 93.5%;
+  background-position-y: 12vh;
+  background-size: 20%;
+  /* text-shadow: 1px 3px 0 #969696,
+   1px 13px 5px #aba8a8,
+   -27px 34px 2px rgba(206, 89, 55, 0.01); */
 }
 
 .score-box {
+  /* one */
+  /* text-shadow: 1px 3px 0 #969696,
+  1px 13px 5px #aba8a8; */
+  /* two */
+  /* text-shadow: 1px 3px 0 #969696,
+ 1px 13px 5px #aba8a8,
+ -27px 34px 2px rgba(206, 89, 55, 0.01); */
   text-align: center;
   height: 90%;
   margin: 1rem;
@@ -64,10 +87,12 @@ header {
 }
 
 .canvas-container {
-  border: 3px solid black;
+  border: 3px solid var(--black-smoke-color);
   display: flex;
   justify-content: center;
   align-items: center;
+  /* -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000; */
 }
 
 .apple-icon {
@@ -98,12 +123,18 @@ header {
   display: block;
 }
 
+.snake-modal {
+  width: 300px;
+  border-radius: 25%;
+}
+
 .popup-modal {
   height: 365px;
   text-align: center;
-  background: url('https://i.postimg.cc/2Sn1gNt1/snake-img.jpg');
   width: 650px;
+  color: var(--black-smoke-color);
   color: #f2f3f4;
+  font-weight: bold;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -114,6 +145,7 @@ header {
   transition: all 300ms ease-in-out;
   z-index: 1011;
   border-radius: 25%;
+  cursor: pointer;
 }
 
 .is--visible {
@@ -121,10 +153,9 @@ header {
   pointer-events: auto;
 }
 
-__close {
+.click-close {
   position: absolute;
   font-size: 1.2rem;
-  right: -10px;
   top: -10px;
   cursor: pointer;
 }
