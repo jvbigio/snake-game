@@ -5,6 +5,40 @@ const moveX = 20
 const moveY = 20
 let direction
 
+let soundEffect
+
+function sound (src) {
+  this.sound = document.createElement('audio')
+  this.sound.src = src
+  this.sound.setAttribute('preload', 'auto')
+  this.sound.setAttribute('controls', 'none')
+  this.sound.style.display = 'none'
+  document.body.appendChild(this.sound)
+  this.play = function () {
+    this.sound.play()
+  }
+  this.stop = function () {
+    this.sound.pause()
+  }
+}
+
+function renderSound (soundFile) {
+  soundEffect = new sound(soundFile)
+  soundEffect.play()
+}
+
+function init () {
+  score.textContent = 0
+  newApple()
+  snakeBody = [
+    { x: 60, y: 80 },
+    { x: 40, y: 80 },
+    { x: 20, y: 80 },
+    { x: 0, y: 80 }
+  ]
+  direction = ''
+}
+
 let snakeBody = [
   { x: 60, y: 80 },
   { x: 40, y: 80 },
@@ -24,7 +58,7 @@ window.onload = function () {
   canvas = document.getElementById('gameCanvas')
   canvasContext = canvas.getContext('2d')
   let gameInterval = 100
-
+  // init() // test
   const DEBUG = false
 
   if (DEBUG) {
@@ -33,7 +67,6 @@ window.onload = function () {
 
     gameInterval = 1000
   }
-
   setInterval(() => {
     drawCanvas()
     drawApple()
@@ -162,6 +195,7 @@ function updateScore () {
 // MODAL //
 const bodyBlackout = document.querySelector('.body-blackout')
 const popupModal = document.querySelector('.popup-modal')
+const imageContainer = document.querySelector('.image-container')
 
 function gameOver () {
   popupModal.classList.add('is--visible')
@@ -178,16 +212,10 @@ function gameOver () {
     bodyBlackout.classList.remove('is-blacked-out')
     init()
   })
-}
 
-function init () {
-  score.textContent = 0
-  newApple()
-  snakeBody = [
-    { x: 60, y: 80 },
-    { x: 40, y: 80 },
-    { x: 20, y: 80 },
-    { x: 0, y: 80 }
-  ]
-  direction = ''
+  imageContainer.addEventListener('click', () => {
+    popupModal.classList.remove('is--visible')
+    bodyBlackout.classList.remove('is-blacked-out')
+    init()
+  })
 }
