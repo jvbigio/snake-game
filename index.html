@@ -15,7 +15,6 @@
     <h1>Snake Game <span><i class="fab fa-apple apple-icon"></i></span></h1>
   </header>
   <div class="container">
-
     <div class="score-box"><span><i class="fas fa-trophy trophy"></i></span> Score: <span class="points">0</span></div>
     <div class="canvas-container">
       <canvas id="gameCanvas" width="800" height="600"></canvas>
@@ -26,15 +25,17 @@
       <h3>Game ends if snake collides with itself or the wall</h3>
     </div>
   </div>
-  <div class="body-blackout"></div>
+  <div class="body-blackout">
+  </div>
   <div class="popup-modal shadow">
-  <i class="fas fa-2x fa-times text-white bg-primary p-3 popup-modal__close"></i>
-  <h1 class="font-weight-bold">
-    Game Over
-  </h1>
-  <p>Click X to restart game or use mouse to click anywhere in the shaded area</p>
-</div>
-  <script src="app.js"></script>
+  <i class="fas fa-2x fa-times text-white bg-primary p-3 popup-modal__close click-close"></i>
+    <div class="image-container">
+      <img src="/images/snake-modal.png" alt="image of snake" class="snake-modal">
+    </div>
+    <h1 class="font-weight-bold">Game Over!</h1>
+    <h3>Click on 'X' or anywhere on screen to restart the game</h3>
+  </div>
+  <script src="app.js" type="module"></script>
 </body>
 
 </html>
