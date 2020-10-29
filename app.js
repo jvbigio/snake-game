@@ -5,7 +5,7 @@ const moveX = 20
 const moveY = 20
 let direction
 
-let squishSound
+let soundEffect
 
 function sound (src) {
   this.sound = document.createElement('audio')
@@ -22,10 +22,13 @@ function sound (src) {
   }
 }
 
+function renderSound (soundFile) {
+  soundEffect = new sound(soundFile)
+  soundEffect.play()
+}
+
 function init () {
   score.textContent = 0
-  // squishSound = new sound('/sound/squish.mp3')
-  // const squishSound = new sound('/sound/squish.mp3')
   newApple()
   snakeBody = [
     { x: 60, y: 80 },
@@ -64,7 +67,6 @@ window.onload = function () {
 
     gameInterval = 1000
   }
-
   setInterval(() => {
     drawCanvas()
     drawApple()
@@ -95,7 +97,6 @@ window.onload = function () {
 }
 
 window.addEventListener('keydown', e => {
-  // e.preventDefault()
   const keyPress = e.key
 
   if (keyPress === 'ArrowDown' && direction !== 'ArrowUp') {
@@ -179,8 +180,8 @@ function snakeCollision () {
 }
 
 function wallCollision () {
+
   if (snakeBody[0].y < 0 || snakeBody[0].y === canvas.height || snakeBody[0].x === canvas.width || snakeBody[0].x < 0) {
-    squishSound('/sound/squish.mp3')
     gameOver()
   }
 }
@@ -198,6 +199,7 @@ const popupModal = document.querySelector('.popup-modal')
 const imageContainer = document.querySelector('.image-container')
 
 function gameOver () {
+  // mySound.pause()
   popupModal.classList.add('is--visible')
   bodyBlackout.classList.add('is-blacked-out')
 
