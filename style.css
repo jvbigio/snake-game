@@ -25,11 +25,7 @@ header {
   box-shadow: 5px 5px 15px -3px #000000; */
   color: var(--main-bg-color);
   text-shadow: 3px 5px 2px #474747,
-<<<<<<< HEAD
     2px 2px 2px rgba(206, 89, 55, 0);
-=======
-  2px 2px 2px rgba(206, 89, 55, 0);
->>>>>>> sound-effects
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,11 +53,7 @@ header {
   /* text-shadow: 1px 3px 0 #969696,
   1px 13px 5px #aba8a8; */
   /* two */
-<<<<<<< HEAD
   /* text-shadow: 1px 3px 0 #969696,
-=======
- /* text-shadow: 1px 3px 0 #969696,
->>>>>>> sound-effects
  1px 13px 5px #aba8a8,
  -27px 34px 2px rgba(206, 89, 55, 0.01); */
   text-align: center;
@@ -162,15 +154,8 @@ header {
 }
 
 .click-close {
-<<<<<<< HEAD
   position: absolute;
   font-size: 1.2rem;
   top: -10px;
   cursor: pointer;
-=======
-   position: absolute;
-   font-size: 1.2rem;
-   top: -10px;
-   cursor: pointer;
->>>>>>> sound-effects
 }
