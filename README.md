@@ -6,7 +6,7 @@ Play [here](https://jvbigio.github.io/snake-game/)
 
 # Image
 
-![Image of snake game](https://i.postimg.cc/yYgxkksX/snake-game.png)
+![Image of snake game](https://i.postimg.cc/P5LdScPW/snake-Game.png)
 
 # Summary
 
