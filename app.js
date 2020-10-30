@@ -5,7 +5,7 @@ const moveX = 20
 const moveY = 20
 let direction
 
-let soundEffect
+// let soundEffect = new Audio('/sound/impact.mp3').preload()
 
 function sound (src) {
   this.sound = document.createElement('audio')
@@ -180,8 +180,8 @@ function snakeCollision () {
 }
 
 function wallCollision () {
-
   if (snakeBody[0].y < 0 || snakeBody[0].y === canvas.height || snakeBody[0].x === canvas.width || snakeBody[0].x < 0) {
+    soundEffect.play()
     gameOver()
   }
 }
@@ -192,6 +192,7 @@ function updateScore () {
     return playerScore
   }
 }
+
 
 // MODAL //
 const bodyBlackout = document.querySelector('.body-blackout')
