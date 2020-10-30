@@ -13,7 +13,18 @@
 body {
   font-family: 'Baloo Tammudu 2', cursive;
   background: var(--main-bg-color);
+  background: url('https://i.postimg.cc/ZRnHsPLj/snake-in-tree.png') no-repeat;
+  background-position-x: -150px;
+  background-size: inherit;
+
 }
+
+@media(min-width: 501px) and (max-width: 768px) {
+  body {
+    background-size: 10%;
+  }
+}
+
 
 header {
   background: url('/images/trees-navbar.png');
@@ -33,10 +44,6 @@ header {
   flex-direction: column;
   align-items: center;
   height: 80%;
-  background: url('https://i.postimg.cc/ZRnHsPLj/snake-in-tree.png') no-repeat;
-  background-position-x: 93.5%;
-  background-position-y: 12vh;
-  background-size: 20%;
 }
 
 .score-box {
@@ -75,6 +82,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
 }
 
 .apple-icon {
