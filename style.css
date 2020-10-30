@@ -16,7 +16,6 @@ body {
   background: url('https://i.postimg.cc/ZRnHsPLj/snake-in-tree.png') no-repeat;
   background-position-x: -150px;
   background-size: inherit;
-
 }
 
 @media(min-width: 501px) and (max-width: 768px) {
@@ -44,6 +43,10 @@ header {
   flex-direction: column;
   align-items: center;
   height: 80%;
+}
+
+img {
+  background-color: var(--main-bg-color);
 }
 
 .score-box {
