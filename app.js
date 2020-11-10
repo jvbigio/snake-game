@@ -77,14 +77,14 @@ window.onload = function () {
 window.addEventListener('keydown', e => {
   const keyPress = e.key
 
-  if (keyPress === 'ArrowDown' && snake.direction !== 'ArrowUp') {
-    snake.direction = 'ArrowDown'
-  } else if (keyPress === 'ArrowUp' && snake.direction !== 'ArrowDown') {
-    snake.direction = 'ArrowUp'
-  } else if (keyPress === 'ArrowRight' && snake.direction !== 'ArrowLeft') {
-    snake.direction = 'ArrowRight'
-  } else if (keyPress === 'ArrowLeft' && snake.direction !== 'ArrowRight') {
-    snake.direction = 'ArrowLeft'
+  if (keyPress === ARROW_DOWN && snake.direction !== ARROW_UP) {
+    snake.direction = ARROW_DOWN
+  } else if (keyPress === ARROW_UP && snake.direction !== ARROW_DOWN) {
+    snake.direction = ARROW_UP
+  } else if (keyPress === ARROW_RIGHT && snake.direction !== ARROW_LEFT) {
+    snake.direction = ARROW_RIGHT
+  } else if (keyPress === ARROW_LEFT && snake.direction !== ARROW_RIGHT) {
+    snake.direction = ARROW_LEFT
   }
 })
 
@@ -122,13 +122,13 @@ function moveSnake () {
     snake.body[i].x = snake.body[i - 1].x
     snake.body[i].y = snake.body[i - 1].y
   }
-  if (snake.direction === 'ArrowUp') {
+  if (snake.direction === ARROW_UP) {
     snake.body[0].y -= GRID_SIZE
-  } else if (snake.direction === 'ArrowRight') {
+  } else if (snake.direction === ARROW_RIGHT) {
     snake.body[0].x += GRID_SIZE
-  } else if (snake.direction === 'ArrowDown') {
+  } else if (snake.direction === ARROW_DOWN) {
     snake.body[0].y += GRID_SIZE
-  } else if (snake.direction === 'ArrowLeft') {
+  } else if (snake.direction === ARROW_LEFT) {
     snake.body[0].x -= GRID_SIZE
   }
 }
