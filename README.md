@@ -10,7 +10,9 @@ Play [here](https://jvbigio.github.io/snake-game/)
 
 # Summary
 
-I love games, so this application was super fun to write and is also my first game application. Although it is super simple in design and graphics, there were many obstacles to clear when writing the snake movement algorithm.
+I love games, so this application was super fun to write and is also my first game application. Although it is super simple in design and graphics, there were many obstacles to clear when writing the snake movement algorithm. For example, figuring out the snake movement algorithm required one to think outside of the box and iterate over the snake parts backwards in order to have the snake parts follow the head like links in a chain. Additionally, this was also my first experience working with canvas and implementing setInterval so extensively.
+
+I plan to implement more features soon, such as sound effects and difficulty levels. Stay tuned!
 
 # Game Rules
 
