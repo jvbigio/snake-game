@@ -1,32 +1,27 @@
+const GRID_SIZE = 20
+const ARROW_RIGHT = 'ArrowRight'
+const ARROW_DOWN = 'ArrowDown'
+const ARROW_LEFT = 'ArrowLeft'
+const ARROW_UP = 'ArrowUp'
+
 let canvas
 let canvasContext
-const snakeHeight = 20
-const moveX = 20
-const moveY = 20
-let direction
 
-function init () {
-  score.textContent = 0
-  newApple()
-  snakeBody = [
+const snake = {
+  body: [
     { x: 60, y: 80 },
     { x: 40, y: 80 },
     { x: 20, y: 80 },
     { x: 0, y: 80 }
-  ]
-  direction = ''
+  ],
+  direction: undefined
 }
 
-let snakeBody = [
-  { x: 60, y: 80 },
-  { x: 40, y: 80 },
-  { x: 20, y: 80 },
-  { x: 0, y: 80 }
-]
+const apple = {
+  x: 0,
+  y: 0
+}
 
-let appleX = 0
-let appleY = 0
-let eatingApple
 newApple()
 
 const score = document.querySelector('.points')
@@ -39,36 +34,42 @@ window.onload = function () {
   const DEBUG = false
 
   if (DEBUG) {
-    appleX = 120
-    appleY = 80
+    apple.x = 120
+    apple.y = 80
 
     gameInterval = 1000
   }
   setInterval(() => {
     drawCanvas()
     drawApple()
-    eatingApple = false
     const isSnakeAboutToEatApple = ateApple()
     if (isSnakeAboutToEatApple) {
-      const clonedHead = JSON.parse(JSON.stringify(snakeBody[0]))
-      if (direction === 'ArrowRight') {
-        clonedHead.x += moveX
-      } else if (direction === 'ArrowDown') {
-        clonedHead.y += moveY
-      } else if (direction === 'ArrowLeft') {
-        clonedHead.x -= moveX
-      } else if (direction === 'ArrowUp') {
-        clonedHead.y -= moveY
+      const clonedHead = JSON.parse(JSON.stringify(snake.body[0]))
+      switch (snake.direction) {
+        case ARROW_RIGHT:
+          clonedHead.x += GRID_SIZE
+          break
+        case ARROW_DOWN:
+          clonedHead.y += GRID_SIZE
+          break
+        case ARROW_LEFT:
+          clonedHead.x -= GRID_SIZE
+          break
+        case ARROW_UP:
+          clonedHead.y -= GRID_SIZE
+          break
       }
-      snakeBody.unshift(clonedHead)
+
+      snake.body.unshift(clonedHead)
       playerScore++
       newApple()
     } else {
       moveSnake()
     }
     drawSnake()
-    snakeCollision()
-    wallCollision()
+    if (snakeCollision() || wallCollision()) {
+      gameOver()
+    }
     updateScore()
   }, gameInterval)
 }
@@ -76,16 +77,29 @@ window.onload = function () {
 window.addEventListener('keydown', e => {
   const keyPress = e.key
 
-  if (keyPress === 'ArrowDown' && direction !== 'ArrowUp') {
-    direction = 'ArrowDown'
-  } else if (keyPress === 'ArrowUp' && direction !== 'ArrowDown') {
-    direction = 'ArrowUp'
-  } else if (keyPress === 'ArrowRight' && direction !== 'ArrowLeft') {
-    direction = 'ArrowRight'
-  } else if (keyPress === 'ArrowLeft' && direction !== 'ArrowRight') {
-    direction = 'ArrowLeft'
+  if (keyPress === 'ArrowDown' && snake.direction !== 'ArrowUp') {
+    snake.direction = 'ArrowDown'
+  } else if (keyPress === 'ArrowUp' && snake.direction !== 'ArrowDown') {
+    snake.direction = 'ArrowUp'
+  } else if (keyPress === 'ArrowRight' && snake.direction !== 'ArrowLeft') {
+    snake.direction = 'ArrowRight'
+  } else if (keyPress === 'ArrowLeft' && snake.direction !== 'ArrowRight') {
+    snake.direction = 'ArrowLeft'
   }
 })
+
+function init () {
+  score.textContent = 0
+  newApple()
+  snake.body = [
+    { x: 60, y: 80 },
+    { x: 40, y: 80 },
+    { x: 20, y: 80 },
+    { x: 0, y: 80 }
+  ]
+  snake.direction = ''
+  playerScore = 0
+}
 
 function drawCanvas () {
   canvasContext.fillStyle = 'green'
@@ -94,79 +108,70 @@ function drawCanvas () {
 
 function drawSnake () {
   canvasContext.fillStyle = '#303030'
-  canvasContext.fillRect(snakeBody[0].x, snakeBody[0].y, 20, snakeHeight)
+  canvasContext.fillRect(snake.body[0].x, snake.body[0].y, GRID_SIZE, GRID_SIZE)
   canvasContext.fillStyle = 'blue'
-  for (let i = 1; i < snakeBody.length; i++) {
-    const element = snakeBody[i]
-    canvasContext.fillRect(element.x, element.y, 20, snakeHeight)
+  for (let i = 1; i < snake.body.length; i++) {
+    canvasContext.fillRect(snake.body[i].x, snake.body[i].y, GRID_SIZE, GRID_SIZE)
   }
 }
 
 function moveSnake () {
-  if (!direction) { return }
+  if (!snake.direction) { return }
 
-  for (let i = snakeBody.length - 1; i > 0; i--) {
-    snakeBody[i].x = snakeBody[i - 1].x
-    snakeBody[i].y = snakeBody[i - 1].y
+  for (let i = snake.body.length - 1; i > 0; i--) {
+    snake.body[i].x = snake.body[i - 1].x
+    snake.body[i].y = snake.body[i - 1].y
   }
-  if (direction === 'ArrowUp') {
-    snakeBody[0].y -= moveY
-  } else if (direction === 'ArrowRight') {
-    snakeBody[0].x += moveX
-  } else if (direction === 'ArrowDown') {
-    snakeBody[0].y += moveY
-  } else if (direction === 'ArrowLeft') {
-    snakeBody[0].x -= moveX
+  if (snake.direction === 'ArrowUp') {
+    snake.body[0].y -= GRID_SIZE
+  } else if (snake.direction === 'ArrowRight') {
+    snake.body[0].x += GRID_SIZE
+  } else if (snake.direction === 'ArrowDown') {
+    snake.body[0].y += GRID_SIZE
+  } else if (snake.direction === 'ArrowLeft') {
+    snake.body[0].x -= GRID_SIZE
   }
 }
 
 function drawApple () {
   canvasContext.fillStyle = '#b11b1b'
-  canvasContext.fillRect(appleX, appleY, 20, 20)
-  eatingApple = false
+  canvasContext.fillRect(apple.x, apple.y, GRID_SIZE, GRID_SIZE)
 }
 
 function ateApple () {
-  if (snakeBody[0].x === appleX && snakeBody[0].y === appleY) {
-    eatingApple = true
-  }
-  return eatingApple
+  return snake.body[0].x === apple.x && snake.body[0].y === apple.y
 }
 
 function newApple () {
   const randomX = Math.random() * (780 + 20)
-  appleX = randomX - (randomX % 20)
+  apple.x = randomX - (randomX % 20)
   const randomY = Math.random() * (580 + 20)
-  appleY = randomY - (randomY % 20)
+  apple.y = randomY - (randomY % 20)
 
-  if (!eatingApple) {
-    snakeBody.forEach(snake => {
-      if (snake.x === appleX && snake.y === appleY) {
-        newApple()
-      }
-    })
-  }
+  snake.body.forEach(snake => {
+    if (snake.x === apple.x && snake.y === apple.y) {
+      newApple()
+    }
+  })
 }
 
 function snakeCollision () {
-  for (let i = 1; i < snakeBody.length; i++) {
-    if (snakeBody[0].x === snakeBody[i].x && snakeBody[0].y === snakeBody[i].y) {
-      gameOver()
+  for (let i = 1; i < snake.body.length; i++) {
+    if (snake.body[0].x === snake.body[i].x && snake.body[0].y === snake.body[i].y) {
+      return true
     }
   }
 }
 
 function wallCollision () {
-  if (snakeBody[0].y < 0 || snakeBody[0].y === canvas.height || snakeBody[0].x === canvas.width || snakeBody[0].x < 0) {
-    gameOver()
+  if (snake.body[0].y < 0 || snake.body[0].y === canvas.height || snake.body[0].x === canvas.width || snake.body[0].x < 0) {
+    return true
   }
 }
 
 function updateScore () {
-  if (eatingApple) {
-    score.textContent = playerScore
-    return playerScore
-  }
+  score.textContent = playerScore
+  return playerScore
 }
 
 // MODAL //
