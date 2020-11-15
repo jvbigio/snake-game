@@ -13,9 +13,9 @@
 body {
   font-family: 'Baloo Tammudu 2', cursive;
   background: var(--main-bg-color);
-  background: url('https://i.postimg.cc/ZRnHsPLj/snake-in-tree.png') no-repeat;
-  background-position-x: -150px;
-  background-size: inherit;
+  background: url('./images/snake-in-tree.png') no-repeat;
+  background-position-x: -170px;
+  background-size: 700px;
 }
 
 @media(min-width: 501px) and (max-width: 768px) {
@@ -25,7 +25,7 @@ body {
 }
 
 header {
-  background: url('https://i.postimg.cc/L5BVKN5v/trees-navbar.jpg');
+  background: url('./images/trees-navbar.png');
   background-size: cover;
   color: var(--main-bg-color);
   text-shadow: 3px 5px 2px #474747,
